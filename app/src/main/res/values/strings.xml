@@ -3,6 +3,11 @@
     <string name="app_slogan">Kết nối quảng cáo hiệu quả</string>
     <string name="register">Đăng ký</string>
     <string name="login">Đăng nhập</string>
+    <string name="login_fail">Tài khoản không tồn tại</string>
+    <string name="email_empty">Email không được rỗng</string>
+    <string name="email_syntax_error">Email lỗi định dạng</string>
+    <string name="password_empty">Password không được rỗng</string>
+    <string name="password_short">Password phải trên 6 ký tự</string>
 
     <string name="invalidate_email_or_password">Email hoặc mật khẩu chưa đúng</string>
     <string name="error_request">Lỗi kết nối</string>
