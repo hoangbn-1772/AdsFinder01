@@ -2,10 +2,14 @@ package com.sun.adsfinder01.ui.login
 
 import androidx.annotation.NonNull
 import androidx.core.util.PatternsCompat
-import com.sun.adsfinder01.util.Constants
 
 class EmailAndPasswordValidator {
-    fun validate(email: String?, password: String?, @NonNull callback: Callback) {
+
+    fun validate(
+        email: String?,
+        password: String?,
+        confirmPassword: String?, @NonNull callback: Callback
+    ) {
         if (email.isNullOrEmpty()) {
             callback.onEmailEmpty()
             return
@@ -25,6 +29,21 @@ class EmailAndPasswordValidator {
             return
         }
 
+        if (confirmPassword.isNullOrEmpty()) {
+            callback.onConfirmPasswordEmpty()
+            return
+        }
+
+        if (confirmPassword.trim().length < MIN_PASSWORD_LENGTH) {
+            callback.onInvalidLengthConfirmPassword()
+            return
+        }
+
+        if (password != confirmPassword) {
+            callback.onInvalidConfirmPassword()
+            return
+        }
+
         callback.onValidEmailAndPassword()
     }
 
@@ -38,6 +57,12 @@ class EmailAndPasswordValidator {
         fun onInvalidLengthPassword()
 
         fun onValidEmailAndPassword()
+
+        fun onConfirmPasswordEmpty()
+
+        fun onInvalidLengthConfirmPassword()
+
+        fun onInvalidConfirmPassword()
     }
 
     companion object {

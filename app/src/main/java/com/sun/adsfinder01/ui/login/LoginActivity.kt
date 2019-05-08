@@ -1,6 +1,7 @@
 package com.sun.adsfinder01.ui.login
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,6 +13,7 @@ import com.sun.adsfinder01.data.model.NetworkStatus.ERROR
 import com.sun.adsfinder01.data.model.NetworkStatus.INVALID
 import com.sun.adsfinder01.data.model.NetworkStatus.SUCCESS
 import com.sun.adsfinder01.data.model.User
+import com.sun.adsfinder01.ui.register.RegistrationActivity
 import kotlinx.android.synthetic.main.activity_login.buttonLogin
 import kotlinx.android.synthetic.main.activity_login.buttonRegister
 import kotlinx.android.synthetic.main.activity_login.editUserEmail
@@ -48,7 +50,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             handleResponse(response)
         })
 
-        viewModel.emailOrPassword.observe(this, Observer { status ->
+        viewModel.dataValidatorError.observe(this, Observer { status ->
             handleEmailAndPassword(status)
         })
     }
@@ -59,7 +61,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun handleRegister() {
-        //TODO: Register
+        Intent(this, RegistrationActivity::class.java).also {
+            startActivity(it)
+        }
     }
 
     private fun handleLogin() {
