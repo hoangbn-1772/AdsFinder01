@@ -2,16 +2,23 @@ package com.sun.adsfinder01.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sun.adsfinder01.R
 import com.sun.adsfinder01.data.model.Place
 import com.sun.adsfinder01.databinding.ItemPostsBinding
 import com.sun.adsfinder01.util.autoNotify
+import kotlinx.android.synthetic.main.item_posts.view.imageLike
 
-class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter(
+    private var data: List<Place>,
+    @NonNull private val itemOnClick: (place: Place) -> Unit,
+    @NonNull private val savePlaceOnClick: (place: Place, status: Boolean) -> Unit
+) :
+    RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
-    private var data: List<Place> = ArrayList()
+    private var isSaved = false
 
     fun updatePlaces(places: List<Place>) = when {
         data.isNullOrEmpty() -> {
@@ -30,7 +37,6 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
             parent,
             false
         )
-        // Binding callback here
         return HomeViewHolder(binding)
     }
 
@@ -44,6 +50,31 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     inner class HomeViewHolder(private val binding: ItemPostsBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(place: Place) {
+            binding.apply {
+                this.place = place
+                this.executePendingBindings()
+
+                root.setOnClickListener {
+                    itemOnClick(place)
+                }
+
+                root.imageLike.setOnClickListener {
+                    onSavePlace(place)
+                }
+            }
+        }
+
+        private fun onSavePlace(place: Place) {
+            isSaved = when {
+                isSaved -> {
+                    savePlaceOnClick(place, false)
+                    false
+                }
+                else -> {
+                    savePlaceOnClick(place, true)
+                    true
+                }
+            }
         }
     }
 }

@@ -13,8 +13,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewHome"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
+            android:layout_height="match_parent" />
 
         <ImageView
             android:id="@+id/image_empty"
@@ -24,5 +23,12 @@
             android:layout_centerVertical="true"
             android:background="@drawable/image_empty" />
 
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progressLoading"
+            style="?android:attr/progressBarStyleLargeInverse"
+            android:layout_width="@dimen/dp_56"
+            android:layout_height="@dimen/dp_56"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
     </RelativeLayout>
 </layout>

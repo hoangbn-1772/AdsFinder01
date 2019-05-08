@@ -1,6 +1,7 @@
 package com.sun.adsfinder01.data.remote
 
 import com.sun.adsfinder01.data.model.Account
+import com.sun.adsfinder01.data.model.PlaceWrapper
 import com.sun.adsfinder01.data.model.UserWrapper
 import com.sun.adsfinder01.data.repository.UserDataSource
 import com.sun.adsfinder01.data.repository.api.ApiService
@@ -14,5 +15,9 @@ class UserRemoteDataSource(private val apiService: ApiService) : UserDataSource.
 
     override fun register(account: Account?): Single<UserWrapper> {
         return apiService.register(account)
+    }
+
+    override fun getPlaces(author: Int?, placeStatus: String?): Single<PlaceWrapper> {
+        return apiService.getPlaces(author, placeStatus)
     }
 }

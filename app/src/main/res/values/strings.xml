@@ -35,4 +35,7 @@
     <string name="menu_here">Gần đây</string>
     <string name="menu_notification">Thông báo</string>
     <string name="search">Tìm kiếm địa điểm</string>
+    <string name="place_size">Kích thước</string>
+    <string name="place_unit">m2</string>
+    <string name="updating">Đang cập nhật</string>
 </resources>
