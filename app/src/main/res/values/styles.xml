@@ -62,4 +62,9 @@
         <item name="color">@color/color_white</item>
     </style>
 
+    <style name="TextContent">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
+
 </resources>
