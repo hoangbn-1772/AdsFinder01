@@ -1,8 +1,11 @@
 package com.sun.adsfinder01.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.sun.adsfinder01.data.model.base.DataWrapperBase
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User(
     @SerializedName(ID) val id: Int?,
     @SerializedName(FIRST_NAME) val firstName: String?,
@@ -13,7 +16,7 @@ data class User(
     @SerializedName(BIRTH_DATE) val birthDate: String?,
     @SerializedName(GENDER) var gender: String?,
     @SerializedName(ROLE) var role: String?
-) {
+) : Parcelable {
 
     companion object {
         const val ID = "id"
