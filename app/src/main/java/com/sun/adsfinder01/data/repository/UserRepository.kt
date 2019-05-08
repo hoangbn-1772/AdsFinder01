@@ -10,4 +10,8 @@ class UserRepository(private val userRemoteDataSource: UserRemoteDataSource) : U
     override fun login(account: Account?): Single<UserWrapper> {
         return userRemoteDataSource.login(account)
     }
+
+    override fun register(account: Account?): Single<UserWrapper> {
+        return userRemoteDataSource.register(account)
+    }
 }

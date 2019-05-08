@@ -11,8 +11,10 @@
     <string name="error_request">Lỗi kết nối</string>
     <string name="title_registration">Chào mừng bạn đến với AdsFinder</string>
     <string name="email_hint">adsfinder@gmail.com</string>
-    <string name="password_hint">password</string>
-    <string name="confirm_password_hint">confirm password</string>
-    <string name="display_password">Hiển thị mật khẩu</string>
+    <string name="password_hint">Mật khẩu</string>
+    <string name="confirm_password_hint">Xác thực mật khẩu</string>
+    <string name="show_password">Hiển thị mật khẩu</string>
     <string name="hide_password">Ẩn mật khẩu</string>
+    <string name="confirm_password_failure">Mật khẩu không khớp</string>
+    <string name="register_fail">Tài khoản này đã tồn tại</string>
 </resources>

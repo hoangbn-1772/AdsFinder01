@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/color_white" />
+        app:titleTextColor="@color/color_while" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textRegisterTitle"
@@ -54,7 +54,7 @@
         android:layout_height="@dimen/dp_48"
         android:layout_margin="@dimen/dp_16"
         android:hint="@string/password_hint"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         android:padding="@dimen/dp_8"
         android:textCursorDrawable="@null"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +69,7 @@
         android:layout_height="@dimen/dp_48"
         android:layout_margin="@dimen/dp_16"
         android:hint="@string/confirm_password_hint"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         android:padding="@dimen/dp_8"
         android:textCursorDrawable="@null"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,8 +82,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
-        android:buttonTint="@color/color_white"
-        android:text="@string/display_password"
+        android:buttonTint="@color/color_while"
+        android:text="@string/show_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editConfirmPassword"
@@ -104,4 +104,14 @@
         app:layout_constraintTop_toBottomOf="@id/editConfirmPassword"
         app:layout_constraintVertical_bias="0.7" />
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progressLoading"
+        style="?android:attr/progressBarStyleLargeInverse"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="@dimen/dp_56"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

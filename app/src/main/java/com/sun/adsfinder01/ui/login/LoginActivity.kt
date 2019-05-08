@@ -69,6 +69,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun handleLogin() {
         enableLogin(false)
         showProgress(true)
+        enableRegister(false)
 
         val emailInput = editUserEmail?.text.toString()
         val passwordInput = editUserPassword?.text.toString()
@@ -95,12 +96,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun handlingUserInfo(data: User?) {
         showProgress(false)
         enableLogin(true)
+        enableRegister(true)
         // Login success
     }
 
     private fun notifyInputInvalid(msg: String) {
         showProgress(false)
         enableLogin(true)
+        enableRegister(true)
         showMessage(msg)
     }
 
@@ -108,6 +111,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         showMessage(resources.getString(R.string.login_fail))
         showProgress(false)
         enableLogin(true)
+        enableRegister(true)
     }
 
     private fun showProgress(isLoading: Boolean) {
@@ -118,7 +122,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         buttonLogin?.isEnabled = isDisable
     }
 
-    private fun enableRegistration(isDisable: Boolean) {
+    private fun enableRegister(isDisable: Boolean) {
         buttonRegister?.isEnabled = isDisable
     }
 

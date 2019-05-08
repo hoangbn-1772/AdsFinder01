@@ -11,4 +11,8 @@ class UserRemoteDataSource(private val apiService: ApiService) : UserDataSource.
     override fun login(account: Account?): Single<UserWrapper> {
         return apiService.login(account)
     }
+
+    override fun register(account: Account?): Single<UserWrapper> {
+        return apiService.register(account)
+    }
 }

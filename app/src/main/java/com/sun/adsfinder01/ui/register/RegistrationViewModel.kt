@@ -1,6 +1,5 @@
-package com.sun.adsfinder01.ui.login
+package com.sun.adsfinder01.ui.register
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,52 +7,58 @@ import com.sun.adsfinder01.data.model.Account
 import com.sun.adsfinder01.data.model.ApiResponse
 import com.sun.adsfinder01.data.model.User
 import com.sun.adsfinder01.data.repository.UserRepository
-import com.sun.adsfinder01.ui.login.EmailAndPasswordValidator.Callback
+import com.sun.adsfinder01.ui.login.EmailAndPasswordValidator
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class LoginViewModel(private val repository: UserRepository) : ViewModel() {
+class RegistrationViewModel(private val repository: UserRepository) : ViewModel() {
+
     private val compositeDisposable = CompositeDisposable()
 
-    private val _user: MutableLiveData<ApiResponse<User>> by lazy {
+    private val _userLiveData: MutableLiveData<ApiResponse<User>> by lazy {
         MutableLiveData<ApiResponse<User>>()
     }
-
-    val user: LiveData<ApiResponse<User>>
-        get() = _user
 
     private val _dataValidatorError: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 
-    val dataValidatorError: MutableLiveData<String>
+    val userLiveData: LiveData<ApiResponse<User>>
+        get() = _userLiveData
+
+    val dataValidatorError: LiveData<String>
         get() = _dataValidatorError
 
-    fun doLogin(email: String?, password: String?) {
-        EmailAndPasswordValidator().validate(
-            email,
-            password,
-            object : Callback {
+    fun handleRegister(email: String?, password: String?, confirmPassword: String?) {
+        EmailAndPasswordValidator().validate(email, password, confirmPassword,
+            object : EmailAndPasswordValidator.RegistrationCallback {
 
                 override fun onEmailEmpty() {
-                    dataValidatorError.postValue(EmailAndPasswordValidator.EMAIL_EMPTY)
+                    _dataValidatorError.postValue(EmailAndPasswordValidator.EMAIL_EMPTY)
                 }
 
                 override fun onInvalidFormatEmail() {
-                    dataValidatorError.postValue(EmailAndPasswordValidator.EMAIL_SYNTAX_ERROR)
+                    _dataValidatorError.postValue(EmailAndPasswordValidator.EMAIL_SYNTAX_ERROR)
                 }
 
                 override fun onPasswordEmpty() {
-                    dataValidatorError.postValue(EmailAndPasswordValidator.PASSWORD_EMPTY)
+                    _dataValidatorError.postValue(EmailAndPasswordValidator.PASSWORD_EMPTY)
                 }
 
                 override fun onInvalidLengthPassword() {
-                    dataValidatorError.postValue(EmailAndPasswordValidator.PASSWORD_SHORT)
+                    _dataValidatorError.postValue(EmailAndPasswordValidator.PASSWORD_SHORT)
+                }
+
+                override fun onInvalidConfirmPassword() {
+                    _dataValidatorError.postValue(EmailAndPasswordValidator.CONFIRM_PASSWORD_FAILURE)
                 }
 
                 override fun onValidEmailAndPassword() {
+                }
+
+                override fun onConfirmSuccess() {
                     doObserve(email, password)
                 }
             })
@@ -61,7 +66,7 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
 
     private fun doObserve(email: String?, password: String?) {
         compositeDisposable.add(
-            repository.login(Account(email, password))
+            repository.register(Account(email, password))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap {
@@ -69,16 +74,16 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
                 }
                 .subscribe(
                     { user ->
-                        _user.postValue(ApiResponse.onSuccess(user))
+                        _userLiveData.postValue(ApiResponse.onSuccess(user))
                     },
                     { error ->
-                        _user.postValue(ApiResponse.onError(error.toString()))
+                        _userLiveData.postValue(ApiResponse.onError(error.toString()))
                     }
                 )
         )
     }
 
-    fun onDestroy() {
+    fun onDestroy(){
         compositeDisposable.clear()
     }
 }

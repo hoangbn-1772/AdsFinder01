@@ -62,7 +62,7 @@ class EmailAndPasswordValidator {
     }
 
     companion object {
-        const val MIN_PASSWORD_LENGTH = 4
+        const val MIN_PASSWORD_LENGTH = 6
 
         const val VALID = "VALID"
 
@@ -73,5 +73,9 @@ class EmailAndPasswordValidator {
         const val EMAIL_SYNTAX_ERROR = "EMAIL_SYNTAX_ERROR"
 
         const val PASSWORD_SHORT = "PASSWORD_SHORT"
+
+        const val CONFIRM_PASSWORD_FAILURE = "CONFIRM_PASSWORD_FAILURE"
+
+        const val PASSWORD_DEFAULT = "PASSWORD_DEFAULT"
     }
 }
