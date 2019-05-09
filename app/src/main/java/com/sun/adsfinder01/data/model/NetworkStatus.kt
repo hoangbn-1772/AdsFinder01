@@ -1,6 +1,6 @@
 package com.sun.adsfinder01.data.model
 
-enum class EnumStatus {
+enum class NetworkStatus {
     INVALID,
     LOADING,
     SUCCESS,
