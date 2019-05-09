@@ -1,6 +1,7 @@
 package com.sun.adsfinder01.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -84,15 +85,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         when (response.status) {
             INVALID -> notifyInputInvalid(response.message)
             SUCCESS -> handlingUserInfo(response.data)
-            ERROR -> notifyLoginFail()
+            ERROR -> notifyLoginFail(response.message)
         }
     }
 
     private fun handlingUserInfo(data: User?) {
-        //TODO: Go to Home Screen
         showProgress(false)
         enableLogin(true)
-        Global.showMessage(this, data?.firstName)
+        // Login success
     }
 
     private fun notifyInputInvalid(msg: String) {
@@ -101,7 +101,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         Global.showMessage(this, msg)
     }
 
-    private fun notifyLoginFail() {
+    private fun notifyLoginFail(error: String) {
         Global.showMessage(this, resources.getString(R.string.login_fail))
         showProgress(false)
         enableLogin(true)

@@ -14,12 +14,11 @@ interface ApiService {
 
         const val BASE_URL = "https://spring-boot-wall-tags.herokuapp.com/adsharingspace/"
 
-        const val CONTENT_TYPE = "Content-Type: application/json"
+        const val CONTENT_TYPE = "Content-Type"
+
+        const val VALUE = "application/json"
     }
 
-    @Headers(CONTENT_TYPE)
     @POST(LOGIN)
-    fun login(
-        @Body body: Account?
-    ): Single<UserWrapper>
+    fun login(@Body body: Account?): Single<UserWrapper>
 }

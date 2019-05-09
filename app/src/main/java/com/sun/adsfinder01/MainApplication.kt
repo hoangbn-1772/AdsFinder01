@@ -1,6 +1,7 @@
 package com.sun.adsfinder01
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 import com.sun.adsfinder01.di.networkModule
 import com.sun.adsfinder01.di.repositoryModule
 import com.sun.adsfinder01.di.viewModelModule
@@ -12,6 +13,7 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Stetho.initializeWithDefaults(this)
 
         startKoin {
             androidLogger()
