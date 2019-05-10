@@ -31,39 +31,35 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
         get() = _dataValidatorError
 
     fun doLogin(email: String?, password: String?) {
-        EmailAndPasswordValidator().validate(email, password, "", object : Callback {
-            override fun onEmailEmpty() {
-                _dataValidatorError.postValue(EmailAndPasswordValidator.EMAIL_EMPTY)
-            }
+        EmailAndPasswordValidator().validate(
+            email,
+            password,
+            object : Callback {
 
-            override fun onInvalidFormatEmail() {
-                _dataValidatorError.postValue(EmailAndPasswordValidator.EMAIL_SYNTAX_ERROR)
-            }
+                override fun onEmailEmpty() {
+                    dataValidatorError.postValue(EmailAndPasswordValidator.EMAIL_EMPTY)
+                }
 
-            override fun onPasswordEmpty() {
-                _dataValidatorError.postValue(EmailAndPasswordValidator.PASSWORD_EMPTY)
-            }
+                override fun onInvalidFormatEmail() {
+                    dataValidatorError.postValue(EmailAndPasswordValidator.EMAIL_SYNTAX_ERROR)
+                }
 
-            override fun onInvalidLengthPassword() {
-                _dataValidatorError.postValue(EmailAndPasswordValidator.PASSWORD_SHORT)
-            }
+                override fun onPasswordEmpty() {
+                    dataValidatorError.postValue(EmailAndPasswordValidator.PASSWORD_EMPTY)
+                }
 
-            override fun onValidEmailAndPassword() {
-                doObserve(email, password)
-            }
+                override fun onInvalidLengthPassword() {
+                    dataValidatorError.postValue(EmailAndPasswordValidator.PASSWORD_SHORT)
+                }
 
-            override fun onConfirmPasswordEmpty() {
-                // do nothing
-            }
+                override fun onValidEmailAndPassword() {
+                    doObserve(email, password)
+                }
 
-            override fun onInvalidLengthConfirmPassword() {
-                // do nothing
-            }
-
-            override fun onInvalidConfirmPassword() {
-                // do nothing
-            }
-        })
+                override fun onInvalidConfirmPassword() {
+                    // Do nothing
+                }
+            })
     }
 
     private fun doObserve(email: String?, password: String?) {

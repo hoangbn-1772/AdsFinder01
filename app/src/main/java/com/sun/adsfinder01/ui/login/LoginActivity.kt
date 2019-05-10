@@ -61,8 +61,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun handleRegister() {
-        Intent(this, RegistrationActivity::class.java).also {
-            startActivity(it)
+        Intent(this, RegistrationActivity::class.java).apply {
+            startActivity(this)
         }
     }
 

@@ -2,13 +2,13 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="false">
         <shape>
-            <solid android:color="@color/colorPrimaryDark" />
+            <solid android:color="@color/color_primary_dark" />
         </shape>
     </item>
 
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="@color/colorSecondPrimaryDark" />
+            <solid android:color="@color/color_second_primary_dark" />
         </shape>
     </item>
 </selector>

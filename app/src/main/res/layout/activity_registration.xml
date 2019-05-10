@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlue"
+    android:background="@color/color_blue"
     tools:context=".ui.register.RegistrationActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarRegistrationScreen"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="@color/color_primary"
         android:theme="@style/ToolbarColoredBackArrow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/colorWhite" />
+        app:titleTextColor="@color/color_white" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textRegisterTitle"
@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
-        android:buttonTint="@color/colorWhite"
+        android:buttonTint="@color/color_white"
         android:text="@string/display_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

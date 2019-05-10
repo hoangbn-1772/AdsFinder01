@@ -5,11 +5,7 @@ import androidx.core.util.PatternsCompat
 
 class EmailAndPasswordValidator {
 
-    fun validate(
-        email: String?,
-        password: String?,
-        confirmPassword: String?, @NonNull callback: Callback
-    ) {
+    fun validate(email: String?, password: String?, @NonNull callback: Callback) {
         if (email.isNullOrEmpty()) {
             callback.onEmailEmpty()
             return
@@ -29,17 +25,30 @@ class EmailAndPasswordValidator {
             return
         }
 
-        if (confirmPassword.isNullOrEmpty()) {
-            callback.onConfirmPasswordEmpty()
+        callback.onValidEmailAndPassword()
+    }
+
+    fun validate(email: String?, password: String?, confirmPassword: String?, @NonNull callback: Callback) {
+        if (email.isNullOrEmpty()) {
+            callback.onEmailEmpty()
+            return
+        }
+        if (!PatternsCompat.EMAIL_ADDRESS.matcher(email.trim()).matches()) {
+            callback.onInvalidFormatEmail()
             return
         }
 
-        if (confirmPassword.trim().length < MIN_PASSWORD_LENGTH) {
-            callback.onInvalidLengthConfirmPassword()
+        if (password.isNullOrEmpty()) {
+            callback.onPasswordEmpty()
             return
         }
 
-        if (password != confirmPassword) {
+        if (password.trim().length < MIN_PASSWORD_LENGTH) {
+            callback.onInvalidLengthPassword()
+            return
+        }
+
+        if (password.trim() != confirmPassword?.trim()) {
             callback.onInvalidConfirmPassword()
             return
         }
@@ -57,10 +66,6 @@ class EmailAndPasswordValidator {
         fun onInvalidLengthPassword()
 
         fun onValidEmailAndPassword()
-
-        fun onConfirmPasswordEmpty()
-
-        fun onInvalidLengthConfirmPassword()
 
         fun onInvalidConfirmPassword()
     }
