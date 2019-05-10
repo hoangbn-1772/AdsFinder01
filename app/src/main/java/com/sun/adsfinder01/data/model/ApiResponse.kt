@@ -1,22 +1,21 @@
 package com.sun.adsfinder01.data.model
 
+import com.sun.adsfinder01.data.model.NetworkStatus.ERROR
 import com.sun.adsfinder01.data.model.NetworkStatus.INVALID
+import com.sun.adsfinder01.data.model.NetworkStatus.SUCCESS
 
 class ApiResponse<T>(
     val status: NetworkStatus,
     val data: T?,
-    val error: Throwable?
+    val message: String
 ) {
 
     companion object {
-        fun <T> loading() = ApiResponse<T>(NetworkStatus.LOADING, null, null)
 
-        fun <T> invalidate() = ApiResponse<T>(INVALID, null, null)
+        fun <T> invalidInput(msg: String) = ApiResponse<T>(INVALID, null, msg)
 
-        fun <T> success(data: T) =
-            ApiResponse<T>(NetworkStatus.SUCCESS, data, null)
+        fun <T> onSuccess(data: T?) = ApiResponse(SUCCESS, data, "")
 
-        fun <T> error(error: Throwable) =
-            ApiResponse<T>(NetworkStatus.ERROR, null, error)
+        fun <T> onError(msg: String) = ApiResponse<T>(ERROR, null, msg)
     }
 }

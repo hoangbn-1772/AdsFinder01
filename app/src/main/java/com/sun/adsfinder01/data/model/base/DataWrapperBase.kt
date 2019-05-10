@@ -3,13 +3,13 @@ package com.sun.adsfinder01.data.model.base
 import com.google.gson.annotations.SerializedName
 
 open class DataWrapperBase<T> {
-    @SerializedName(SUCCESS) val success: Boolean = false
+    @SerializedName(SUCCESS) var success: Boolean = false
 
-    @SerializedName(CODE) val code: String = ""
+    @SerializedName(CODE) var code: Int = 0
 
-    @SerializedName(MESSAGE) val message: String = ""
+    @SerializedName(MESSAGE) var message: String = ""
 
-    @SerializedName(DATA) val data: T? = null
+    @SerializedName(DATA) var data: T? = null
 
     companion object {
         const val SUCCESS = "success"
