@@ -24,29 +24,29 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
     val user: LiveData<ApiResponse<User>>
         get() = _user
 
-    private val _emailOrPassword: MutableLiveData<String> by lazy {
+    private val dataValidatorError: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 
     val emailOrPassword: MutableLiveData<String>
-        get() = _emailOrPassword
+        get() = dataValidatorError
 
     fun doLogin(email: String?, password: String?) {
-        EmailAndPasswordValidator().validateEmail(email, password, object : Callback {
+        EmailAndPasswordValidator().validate(email, password, object : Callback {
             override fun onEmailEmpty() {
-                _emailOrPassword.postValue(Constants.EMAIL_EMPTY)
+                dataValidatorError.postValue(EmailAndPasswordValidator.EMAIL_EMPTY)
             }
 
             override fun onInvalidFormatEmail() {
-                _emailOrPassword.postValue(Constants.EMAIL_SYNTAX_ERROR)
+                dataValidatorError.postValue(EmailAndPasswordValidator.EMAIL_SYNTAX_ERROR)
             }
 
             override fun onPasswordEmpty() {
-                _emailOrPassword.postValue(Constants.PASSWORD_EMPTY)
+                dataValidatorError.postValue(EmailAndPasswordValidator.PASSWORD_EMPTY)
             }
 
             override fun onInvalidLengthPassword() {
-                _emailOrPassword.postValue(Constants.PASSWORD_SHORT)
+                dataValidatorError.postValue(EmailAndPasswordValidator.PASSWORD_SHORT)
             }
 
             override fun onValidEmailAndPassword() {

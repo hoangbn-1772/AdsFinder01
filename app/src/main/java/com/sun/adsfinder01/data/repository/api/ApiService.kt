@@ -11,12 +11,6 @@ interface ApiService {
 
     companion object {
         const val LOGIN = "auth/login"
-
-        const val BASE_URL = "https://spring-boot-wall-tags.herokuapp.com/adsharingspace/"
-
-        const val CONTENT_TYPE = "Content-Type"
-
-        const val VALUE = "application/json"
     }
 
     @POST(LOGIN)

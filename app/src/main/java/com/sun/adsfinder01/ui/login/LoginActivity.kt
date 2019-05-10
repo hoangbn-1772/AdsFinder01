@@ -1,8 +1,9 @@
 package com.sun.adsfinder01.ui.login
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.sun.adsfinder01.R
@@ -11,8 +12,6 @@ import com.sun.adsfinder01.data.model.NetworkStatus.ERROR
 import com.sun.adsfinder01.data.model.NetworkStatus.INVALID
 import com.sun.adsfinder01.data.model.NetworkStatus.SUCCESS
 import com.sun.adsfinder01.data.model.User
-import com.sun.adsfinder01.util.Constants
-import com.sun.adsfinder01.util.Global
 import kotlinx.android.synthetic.main.activity_login.buttonLogin
 import kotlinx.android.synthetic.main.activity_login.buttonRegister
 import kotlinx.android.synthetic.main.activity_login.editUserEmail
@@ -74,10 +73,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun handleEmailAndPassword(status: String) {
         when (status) {
-            Constants.EMAIL_EMPTY -> notifyInputInvalid(resources.getString(R.string.email_empty))
-            Constants.EMAIL_SYNTAX_ERROR -> notifyInputInvalid(resources.getString(R.string.email_syntax_error))
-            Constants.PASSWORD_EMPTY -> notifyInputInvalid(resources.getString(R.string.password_empty))
-            Constants.PASSWORD_SHORT -> notifyInputInvalid(resources.getString(R.string.password_short))
+            EmailAndPasswordValidator.EMAIL_EMPTY -> notifyInputInvalid(resources.getString(R.string.email_empty))
+            EmailAndPasswordValidator.EMAIL_SYNTAX_ERROR -> notifyInputInvalid(resources.getString(R.string.email_syntax_error))
+            EmailAndPasswordValidator.PASSWORD_EMPTY -> notifyInputInvalid(resources.getString(R.string.password_empty))
+            EmailAndPasswordValidator.PASSWORD_SHORT -> notifyInputInvalid(resources.getString(R.string.password_short))
         }
     }
 
@@ -98,11 +97,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun notifyInputInvalid(msg: String) {
         showProgress(false)
         enableLogin(true)
-        Global.showMessage(this, msg)
+        showMessage(msg)
     }
 
     private fun notifyLoginFail(error: String) {
-        Global.showMessage(this, resources.getString(R.string.login_fail))
+        showMessage(resources.getString(R.string.login_fail))
         showProgress(false)
         enableLogin(true)
     }
@@ -118,4 +117,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun enableRegistration(isDisable: Boolean) {
         buttonRegister?.isEnabled = isDisable
     }
+
+    private fun Context.showMessage(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }
