@@ -10,11 +10,11 @@
 
     <style name="CommonText">
         <item name="android:fontFamily">@font/montserrat_regular</item>
-        <item name="android:textColor">@color/color_while</item>
+        <item name="android:textColor">@color/color_white</item>
     </style>
 
     <style name="CommonEdit">
-        <item name="android:background">@color/color_while</item>
+        <item name="android:background">@color/color_white</item>
         <item name="android:fontFamily">@font/montserrat_regular</item>
     </style>
 
@@ -40,7 +40,7 @@
     </style>
 
     <style name="ToolbarColoredBackArrow" parent="AppTheme">
-        <item name="android:textColorSecondary">@color/color_while</item>
+        <item name="android:textColorSecondary">@color/color_white</item>
     </style>
 
     <style name="Notification" parent="CommonText">

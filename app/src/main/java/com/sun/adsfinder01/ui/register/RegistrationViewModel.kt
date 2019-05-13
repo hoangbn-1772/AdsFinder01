@@ -83,7 +83,8 @@ class RegistrationViewModel(private val repository: UserRepository) : ViewModel(
         )
     }
 
-    fun onDestroy(){
+    override fun onCleared() {
+        super.onCleared()
         compositeDisposable.clear()
     }
 }

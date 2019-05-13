@@ -1,13 +1,11 @@
 package com.sun.adsfinder01.ui.register
 
-import android.content.Context
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.CompoundButton.OnCheckedChangeListener
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.sun.adsfinder01.R
@@ -17,6 +15,7 @@ import com.sun.adsfinder01.data.model.NetworkStatus.INVALID
 import com.sun.adsfinder01.data.model.NetworkStatus.SUCCESS
 import com.sun.adsfinder01.data.model.User
 import com.sun.adsfinder01.ui.login.EmailAndPasswordValidator
+import com.sun.adsfinder01.util.ContextExtension.showMessage
 import kotlinx.android.synthetic.main.activity_registration.buttonRegisterAccount
 import kotlinx.android.synthetic.main.activity_registration.checkboxPassword
 import kotlinx.android.synthetic.main.activity_registration.editConfirmPassword
@@ -38,21 +37,16 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener, OnChecke
         doObserve()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.onDestroy()
-    }
-
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.buttonRegisterAccount -> handleRegister()
+            R.id.buttonRegisterAccount -> registerAccount()
         }
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
         when {
-            isChecked -> handleHidePassword()
-            else -> handleShowPassword()
+            isChecked -> hidePassword()
+            else -> showPassword()
         }
     }
 
@@ -75,19 +69,19 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener, OnChecke
         viewModel.userLiveData.observe(this, Observer { response ->
             handleResponse(response)
             doLoading(false)
-            enableRegistration(true)
+            enableRegister(true)
         })
 
         viewModel.dataValidatorError.observe(this, Observer { status ->
-            handleInput(status)
+            showError(status)
             doLoading(false)
-            enableRegistration(true)
+            enableRegister(true)
         })
     }
 
-    private fun handleRegister() {
+    private fun registerAccount() {
         doLoading(true)
-        enableRegistration(false)
+        enableRegister(false)
 
         val emailInput = editEmailRegistration.text.toString()
         val passwordInput = editPasswordRegistration.text.toString()
@@ -96,8 +90,8 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener, OnChecke
         viewModel.handleRegister(emailInput, passwordInput, confirmPassword)
     }
 
-    private fun handleInput(status: String) {
-        when (status) {
+    private fun showError(errorType: String) {
+        when (errorType) {
             EmailAndPasswordValidator.EMAIL_EMPTY -> showMessage(resources.getString(R.string.email_empty))
             EmailAndPasswordValidator.EMAIL_SYNTAX_ERROR -> showMessage(resources.getString(R.string.email_syntax_error))
             EmailAndPasswordValidator.PASSWORD_EMPTY -> showMessage(resources.getString(R.string.password_empty))
@@ -106,7 +100,7 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener, OnChecke
         }
     }
 
-    private fun handleShowPassword() {
+    private fun showPassword() {
         checkboxPassword?.text = resources.getString(R.string.show_password)
         editPasswordRegistration?.transformationMethod = PasswordTransformationMethod.getInstance()
         editConfirmPassword?.transformationMethod = PasswordTransformationMethod.getInstance()
@@ -114,7 +108,7 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener, OnChecke
         editConfirmPassword?.text?.length?.let { editConfirmPassword?.setSelection(it) }
     }
 
-    private fun handleHidePassword() {
+    private fun hidePassword() {
         checkboxPassword?.text = resources.getString(R.string.hide_password)
         editPasswordRegistration?.transformationMethod = HideReturnsTransformationMethod.getInstance()
         editConfirmPassword?.transformationMethod = HideReturnsTransformationMethod.getInstance()
@@ -125,22 +119,20 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener, OnChecke
     private fun handleResponse(response: ApiResponse<User>) {
         when (response.status) {
             INVALID -> showMessage(response.message)
-            SUCCESS -> handleRegistrationSuccess(response.data)
+            SUCCESS -> registerSuccess(response.data)
             ERROR -> showMessage(resources.getString(R.string.register_fail))
         }
     }
 
-    private fun handleRegistrationSuccess(data: User?) {
+    private fun registerSuccess(data: User?) {
         // Register success
     }
 
-    private fun enableRegistration(isEnable: Boolean) {
+    private fun enableRegister(isEnable: Boolean) {
         buttonRegisterAccount?.isEnabled = isEnable
     }
 
     private fun doLoading(isLoading: Boolean) {
         progressLoading?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
-
-    private fun Context.showMessage(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }

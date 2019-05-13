@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/color_while" />
+        app:titleTextColor="@color/color_white" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textRegisterTitle"
@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
-        android:buttonTint="@color/color_while"
+        android:buttonTint="@color/color_white"
         android:text="@string/show_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
