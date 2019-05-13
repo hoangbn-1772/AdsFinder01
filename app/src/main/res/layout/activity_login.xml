@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/image_bg"
+    android:background="@drawable/image_background"
     android:padding="@dimen/dp_16"
     tools:context=".ui.login.LoginActivity">
 
@@ -62,7 +62,7 @@
         style="@style/ButtonStyle"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_48"
-        android:background="@color/colorPrimary"
+        android:background="@color/color_primary"
         android:gravity="center"
         android:text="@string/login"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +74,7 @@
         style="@style/ButtonStyle"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_48"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/color_primary_dark"
         android:gravity="center"
         android:text="@string/register"
         app:layout_constraintBottom_toBottomOf="parent"
