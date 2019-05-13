@@ -28,32 +28,19 @@ class EmailAndPasswordValidator {
         callback.onValidEmailAndPassword()
     }
 
-    fun validate(email: String?, password: String?, confirmPassword: String?, @NonNull callback: Callback) {
-        if (email.isNullOrEmpty()) {
-            callback.onEmailEmpty()
-            return
-        }
-        if (!PatternsCompat.EMAIL_ADDRESS.matcher(email.trim()).matches()) {
-            callback.onInvalidFormatEmail()
-            return
-        }
+    fun validate(
+        email: String?,
+        password: String?,
+        confirmPassword: String?, @NonNull callback: RegistrationCallback
+    ) {
+        validate(email, password, callback)
 
-        if (password.isNullOrEmpty()) {
-            callback.onPasswordEmpty()
-            return
-        }
-
-        if (password.trim().length < MIN_PASSWORD_LENGTH) {
-            callback.onInvalidLengthPassword()
-            return
-        }
-
-        if (password.trim() != confirmPassword?.trim()) {
+        if (password?.trim() != confirmPassword?.trim()) {
             callback.onInvalidConfirmPassword()
             return
         }
 
-        callback.onValidEmailAndPassword()
+        callback.onConfirmSuccess()
     }
 
     interface Callback {
@@ -66,8 +53,12 @@ class EmailAndPasswordValidator {
         fun onInvalidLengthPassword()
 
         fun onValidEmailAndPassword()
+    }
 
+    interface RegistrationCallback : Callback {
         fun onInvalidConfirmPassword()
+
+        fun onConfirmSuccess()
     }
 
     companion object {

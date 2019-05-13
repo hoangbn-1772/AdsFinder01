@@ -55,10 +55,6 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
                 override fun onValidEmailAndPassword() {
                     doObserve(email, password)
                 }
-
-                override fun onInvalidConfirmPassword() {
-                    // Do nothing
-                }
             })
     }
 
