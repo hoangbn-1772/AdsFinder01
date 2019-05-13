@@ -1,10 +1,8 @@
 package com.sun.adsfinder01.ui.login
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.sun.adsfinder01.R
@@ -14,6 +12,7 @@ import com.sun.adsfinder01.data.model.NetworkStatus.INVALID
 import com.sun.adsfinder01.data.model.NetworkStatus.SUCCESS
 import com.sun.adsfinder01.data.model.User
 import com.sun.adsfinder01.ui.register.RegistrationActivity
+import com.sun.adsfinder01.util.ContextExtension.showMessage
 import kotlinx.android.synthetic.main.activity_login.buttonLogin
 import kotlinx.android.synthetic.main.activity_login.buttonRegister
 import kotlinx.android.synthetic.main.activity_login.editUserEmail
@@ -31,11 +30,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         initComponent()
 
         doObserve()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.onDestroy()
     }
 
     override fun onClick(v: View?) {
@@ -69,6 +63,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun handleLogin() {
         enableLogin(false)
         showProgress(true)
+        enableRegister(false)
 
         val emailInput = editUserEmail?.text.toString()
         val passwordInput = editUserPassword?.text.toString()
@@ -95,12 +90,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun handlingUserInfo(data: User?) {
         showProgress(false)
         enableLogin(true)
+        enableRegister(true)
         // Login success
     }
 
     private fun notifyInputInvalid(msg: String) {
         showProgress(false)
         enableLogin(true)
+        enableRegister(true)
         showMessage(msg)
     }
 
@@ -108,6 +105,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         showMessage(resources.getString(R.string.login_fail))
         showProgress(false)
         enableLogin(true)
+        enableRegister(true)
     }
 
     private fun showProgress(isLoading: Boolean) {
@@ -118,9 +116,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         buttonLogin?.isEnabled = isDisable
     }
 
-    private fun enableRegistration(isDisable: Boolean) {
+    private fun enableRegister(isDisable: Boolean) {
         buttonRegister?.isEnabled = isDisable
     }
-
-    private fun Context.showMessage(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }

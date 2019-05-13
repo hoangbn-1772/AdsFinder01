@@ -4,6 +4,7 @@
     <color name="color_second_primary">#D62007</color>
     <color name="color_primary_dark">#2A98EF</color>
     <color name="color_white">#FFFFFF</color>
+    <color name="color_red">#F35643</color>
     <color name="color_second_primary_dark">#0871C4</color>
     <color name="color_blue">#32AAE2</color>
 </resources>

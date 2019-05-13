@@ -8,5 +8,7 @@ interface UserDataSource {
     interface Remote {
 
         fun login(account: Account?): Single<UserWrapper>
+
+        fun register(account: Account?): Single<UserWrapper>
     }
 }
