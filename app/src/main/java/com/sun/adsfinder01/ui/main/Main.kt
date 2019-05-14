@@ -1,6 +1,9 @@
 package com.sun.adsfinder01.ui.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +19,7 @@ import kotlinx.android.synthetic.main.app_bar_home.toolbar
 class Main : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private val user by lazy { intent.getParcelableExtra<User>(BUNDLE_USER) }
+    private val user by lazy { intent.getParcelableExtra<User>(EXTRA_USER) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,6 +93,15 @@ class Main : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
     }
 
     companion object {
-        const val BUNDLE_USER = "BUNDLE_USER"
+        const val EXTRA_USER = "com.sun.adsfinder01.ui.main.EXTRA_USER"
+
+        fun getMainIntent(context: Context, user: User?): Intent {
+            val intent = Intent(context, Main::class.java)
+            val bundle = Bundle()
+            bundle.putParcelable(EXTRA_USER, user)
+            intent.putExtras(bundle)
+
+            return intent
+        }
     }
 }

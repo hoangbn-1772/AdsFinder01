@@ -92,13 +92,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         showProgress(false)
         enableLogin(true)
         enableRegister(true)
-
-        Intent(this, Main::class.java).apply {
-            val bundle = Bundle()
-            bundle.putParcelable(Main.BUNDLE_USER, data)
-            this.putExtras(bundle)
-            startActivity(this)
-        }
+        startActivity(Main.getMainIntent(this, data))
     }
 
     private fun notifyInputInvalid(msg: String) {
