@@ -21,10 +21,8 @@ import kotlinx.android.synthetic.main.app_bar_home.viewPagerHome
 import kotlinx.android.synthetic.main.nav_header_home.view.imageViewUserImage
 import kotlinx.android.synthetic.main.nav_header_home.view.textUserName
 
-class Main : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     BottomNavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
-
-    private lateinit var itemMenu: MenuItem
 
     private val user by lazy { intent.getParcelableExtra<User>(EXTRA_USER) }
 
@@ -88,11 +86,6 @@ class Main : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
     }
 
     override fun onPageSelected(position: Int) {
-        if (::itemMenu.isInitialized) {
-            itemMenu.isChecked = false
-        }
-        bottomNavigation.menu.getItem(position).isChecked = true
-        itemMenu = bottomNavigation.menu.getItem(position)
     }
 
     private fun initComponents() {
@@ -119,7 +112,7 @@ class Main : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 
     private fun setupViewPager() {
         val adapter = MainAdapter(supportFragmentManager)
-        adapter.addFragment(HomeFragment.getInstance())
+        adapter.addFragment(HomeFragment.newInstance(user))
         viewPagerHome?.adapter = adapter
     }
 
@@ -141,7 +134,7 @@ class Main : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         const val EXTRA_USER = "com.sun.adsfinder01.ui.main.EXTRA_USER"
 
         fun getMainIntent(context: Context, user: User?): Intent {
-            val intent = Intent(context, Main::class.java)
+            val intent = Intent(context, MainActivity::class.java)
             val bundle = Bundle()
             bundle.putParcelable(EXTRA_USER, user)
             intent.putExtras(bundle)

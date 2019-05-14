@@ -3,12 +3,11 @@ package com.sun.adsfinder01.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sun.adsfinder01.R
 import com.sun.adsfinder01.data.model.Place
 import com.sun.adsfinder01.databinding.ItemPostsBinding
-import java.util.Objects
+import com.sun.adsfinder01.util.autoNotify
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
@@ -20,27 +19,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
             notifyItemRangeInserted(0, places.size)
         }
         else -> {
-            val result = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-                override fun getOldListSize(): Int {
-                    return data.size
-                }
-
-                override fun getNewListSize(): Int {
-                    return places.size
-                }
-
-                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                    return data.get(oldItemPosition).id == places.get(newItemPosition).id
-                }
-
-                override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                    val place = places.get(newItemPosition)
-                    val old = places.get(oldItemPosition)
-                    return place.id == old.id && Objects.equals(place.id, place.id)
-                }
-            })
-            this.data = places
-            result.dispatchUpdatesTo(this)
+            autoNotify(this.data, places) { o, n -> o.id == n.id }
         }
     }
 

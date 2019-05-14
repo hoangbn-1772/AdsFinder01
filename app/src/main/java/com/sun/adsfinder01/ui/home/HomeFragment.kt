@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sun.adsfinder01.R
+import com.sun.adsfinder01.data.model.User
 
 class HomeFragment : Fragment() {
 
@@ -18,10 +19,14 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
-        private val instance: HomeFragment? = null
+        private const val ARGUMENT_USER = "ARGUMENT_USER"
 
-        fun getInstance(): HomeFragment = instance ?: synchronized(this) {
-            instance ?: HomeFragment()
+        fun newInstance(user: User?) = HomeFragment().apply {
+            arguments = Bundle().apply {
+                user?.let {
+                    putParcelable(ARGUMENT_USER, user)
+                }
+            }
         }
     }
 }
