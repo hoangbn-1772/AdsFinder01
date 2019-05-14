@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="place"
+            type="com.sun.adsfinder01.data.model.Place" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_120"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_4">
+
+        <ImageView
+            android:id="@+id/imagePosts"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textWallType"
+            style="@style/TextContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:maxLines="@integer/max_line_1"
+            app:layout_constraintBottom_toTopOf="@+id/textPosterType"
+            app:layout_constraintEnd_toStartOf="@id/imageLike"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/imagePosts"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textPosterType"
+            style="@style/TextContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:maxLines="@integer/max_line_1"
+            app:layout_constraintBottom_toTopOf="@+id/textSize"
+            app:layout_constraintEnd_toStartOf="@id/imageLike"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/imagePosts"
+            app:layout_constraintTop_toBottomOf="@+id/textWallType" />
+
+        <TextView
+            android:id="@+id/textSize"
+            style="@style/TextContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:maxLines="@integer/max_line_1"
+            app:layout_constraintBottom_toTopOf="@+id/textDateCreate"
+            app:layout_constraintEnd_toStartOf="@id/imageLike"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/imagePosts"
+            app:layout_constraintTop_toBottomOf="@+id/textPosterType" />
+
+        <TextView
+            android:id="@+id/textDateCreate"
+            style="@style/TextContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="@integer/max_line_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imageLike"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/imagePosts"
+            app:layout_constraintTop_toBottomOf="@+id/textSize" />
+
+        <ImageView
+            android:id="@+id/imageLike"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_star"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

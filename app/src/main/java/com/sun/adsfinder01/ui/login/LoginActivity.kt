@@ -11,7 +11,7 @@ import com.sun.adsfinder01.data.model.NetworkStatus.ERROR
 import com.sun.adsfinder01.data.model.NetworkStatus.INVALID
 import com.sun.adsfinder01.data.model.NetworkStatus.SUCCESS
 import com.sun.adsfinder01.data.model.User
-import com.sun.adsfinder01.ui.main.Main
+import com.sun.adsfinder01.ui.main.MainActivity
 import com.sun.adsfinder01.ui.register.RegistrationActivity
 import com.sun.adsfinder01.util.ContextExtension.showMessage
 import kotlinx.android.synthetic.main.activity_login.buttonLogin
@@ -92,7 +92,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         showProgress(false)
         enableLogin(true)
         enableRegister(true)
-        startActivity(Main.getMainIntent(this, data))
+        startActivity(MainActivity.getMainIntent(this, data))
     }
 
     private fun notifyInputInvalid(msg: String) {

@@ -23,7 +23,7 @@
         <activity android:name=".ui.register.RegistrationActivity" />
 
         <activity
-            android:name=".ui.main.Main"
+            android:name=".ui.main.MainActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

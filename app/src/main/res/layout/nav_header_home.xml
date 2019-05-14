@@ -18,16 +18,15 @@
         android:layout_height="@dimen/dp_120"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/nav_header_desc"
-        android:src="@drawable/image_user"
         app:civ_border_color="@color/color_white"
         app:civ_border_width="@dimen/dp_2" />
 
     <TextView
+        android:id="@+id/textUserName"
         style="@style/ButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/imageViewUserImage"
         android:gravity="center"
-        android:text="@string/nav_header_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 </RelativeLayout>

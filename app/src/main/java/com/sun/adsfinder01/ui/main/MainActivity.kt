@@ -3,29 +3,35 @@ package com.sun.adsfinder01.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.sun.adsfinder01.R
 import com.sun.adsfinder01.data.model.User
+import com.sun.adsfinder01.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.app_bar_home.bottomNavigation
 import kotlinx.android.synthetic.main.app_bar_home.toolbar
+import kotlinx.android.synthetic.main.app_bar_home.viewPagerHome
+import kotlinx.android.synthetic.main.nav_header_home.view.imageViewUserImage
+import kotlinx.android.synthetic.main.nav_header_home.view.textUserName
 
-class Main : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-    BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+    BottomNavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
 
     private val user by lazy { intent.getParcelableExtra<User>(EXTRA_USER) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_main)
 
         initComponents()
+        setupUserProfile()
     }
 
     override fun onBackPressed() {
@@ -58,6 +64,8 @@ class Main : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
             }
 
             R.id.action_home -> {
+                viewPagerHome?.currentItem = 0
+                return true
             }
 
             R.id.action_here -> {
@@ -71,9 +79,19 @@ class Main : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         return true
     }
 
+    override fun onPageScrollStateChanged(state: Int) {
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+    }
+
+    override fun onPageSelected(position: Int) {
+    }
+
     private fun initComponents() {
         initNavigationDrawer()
         initBottomNavigation()
+        setupViewPager()
     }
 
     private fun initNavigationDrawer() {
@@ -92,11 +110,31 @@ class Main : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         bottomNavigation?.setOnNavigationItemSelectedListener(this)
     }
 
+    private fun setupViewPager() {
+        val adapter = MainAdapter(supportFragmentManager)
+        adapter.addFragment(HomeFragment.newInstance(user))
+        viewPagerHome?.adapter = adapter
+    }
+
+    private fun setupUserProfile() {
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        val view = navigationView.inflateHeaderView(R.layout.nav_header_home)
+        view.imageViewUserImage?.apply {
+            Glide.with(this)
+                .load(user.imageUrl)
+                .centerCrop()
+                .placeholder(R.drawable.image_user)
+                .into(this)
+        }
+
+        view.textUserName?.text = "${user.firstName} ${user.lastName}"
+    }
+
     companion object {
         const val EXTRA_USER = "com.sun.adsfinder01.ui.main.EXTRA_USER"
 
         fun getMainIntent(context: Context, user: User?): Intent {
-            val intent = Intent(context, Main::class.java)
+            val intent = Intent(context, MainActivity::class.java)
             val bundle = Bundle()
             bundle.putParcelable(EXTRA_USER, user)
             intent.putExtras(bundle)
