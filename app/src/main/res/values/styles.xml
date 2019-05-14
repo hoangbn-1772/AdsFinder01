@@ -46,6 +46,20 @@
     <style name="Notification" parent="CommonText">
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColorSecondary">@color/color_white</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/color_white</item>
     </style>
 
 </resources>
