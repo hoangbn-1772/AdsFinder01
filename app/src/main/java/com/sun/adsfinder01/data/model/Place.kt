@@ -24,6 +24,10 @@ data class Place(
     @SerializedName(DATE_CREATED) val dateCreated: String?
 ) : Parcelable {
 
+    fun calculateAria(): Double? {
+        return this.height?.let { width?.times(it) }
+    }
+
     companion object {
         const val ID = "id"
 
@@ -50,10 +54,6 @@ data class Place(
         const val POSTER_TYPE = "posterType"
 
         const val DATE_CREATED = "dateCreated"
-
-        fun calculateAria(width: Double?, height: Double?): Double? {
-            return height?.let { width?.times(it) }
-        }
     }
 }
 

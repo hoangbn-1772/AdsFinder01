@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,19 +13,19 @@ import com.sun.adsfinder01.data.model.NetworkStatus.ERROR
 import com.sun.adsfinder01.data.model.NetworkStatus.SUCCESS
 import com.sun.adsfinder01.data.model.Place
 import com.sun.adsfinder01.data.model.User
-import com.sun.adsfinder01.databinding.FragmentHomeBinding
 import com.sun.adsfinder01.util.ContextExtension.showMessage
+import kotlinx.android.synthetic.main.fragment_home.imageEmpty
+import kotlinx.android.synthetic.main.fragment_home.progressLoading
+import kotlinx.android.synthetic.main.fragment_home.recyclerViewHome
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModel()
 
-    private lateinit var binding: FragmentHomeBinding
-
     private val user by lazy { arguments?.get(ARGUMENT_USER) as User }
 
-    private val adapter by lazy {
+    private val homeAdapter by lazy {
         HomeAdapter(
             ArrayList(),
             { place -> onClickPlaceItem(place) },
@@ -35,26 +34,31 @@ class HomeFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        binding.lifecycleOwner = this
-        binding.recyclerViewHome.layoutManager = LinearLayoutManager(context)
-        binding.recyclerViewHome.adapter = adapter
-        return binding.root
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        requestPlace()
+        initComponents()
+        requestPlaces()
         doObserve()
     }
 
     private fun onClickPlaceItem(place: Place?) {
         // Item click
+        context?.showMessage(place?.address!!)
     }
 
     private fun handleLikePost(place: Place?, status: Boolean) {
         // Icon save click
+        context?.showMessage(place?.dateCreated!!)
+    }
+
+    private fun initComponents() {
+        recyclerViewHome?.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = homeAdapter
+        }
     }
 
     private fun doObserve() {
@@ -63,7 +67,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun requestPlace() {
+    private fun requestPlaces() {
         homeViewModel.requestPlaces(user.id)
     }
 
@@ -76,20 +80,22 @@ class HomeFragment : Fragment() {
 
     private fun updatePlaces(places: List<Place>?) = when {
         places != null -> {
-            adapter.updatePlaces(places)
+            homeAdapter.updatePlaces(places)
             showPlaces()
         }
         else -> hidePlaces()
     }
 
     private fun showPlaces() {
-        binding.progressLoading.visibility = View.GONE
-        binding.imageEmpty.visibility = View.GONE
+        recyclerViewHome.visibility = View.VISIBLE
+        progressLoading.visibility = View.GONE
+        imageEmpty.visibility = View.GONE
     }
 
     private fun hidePlaces() {
-        binding.recyclerViewHome.visibility = View.GONE
-        binding.imageEmpty.visibility = View.VISIBLE
+        recyclerViewHome.visibility = View.GONE
+        progressLoading.visibility = View.GONE
+        imageEmpty.visibility = View.VISIBLE
     }
 
     companion object {

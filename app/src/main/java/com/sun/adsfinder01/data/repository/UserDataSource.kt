@@ -1,7 +1,6 @@
 package com.sun.adsfinder01.data.repository
 
 import com.sun.adsfinder01.data.model.Account
-import com.sun.adsfinder01.data.model.PlaceWrapper
 import com.sun.adsfinder01.data.model.UserWrapper
 import io.reactivex.Single
 

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sun.adsfinder01.data.model.ApiResponse
 import com.sun.adsfinder01.data.model.Place
-import com.sun.adsfinder01.data.repository.api.PlaceRepository
+import com.sun.adsfinder01.data.repository.PlaceRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -26,9 +26,6 @@ class HomeViewModel(private val repository: PlaceRepository) : ViewModel() {
             repository.getPlaces(userId, LATEST)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map { placeWrapper ->
-                    placeWrapper.data
-                }
                 .subscribe(
                     { places ->
                         _placeLiveData.postValue(ApiResponse.onSuccess(places))
