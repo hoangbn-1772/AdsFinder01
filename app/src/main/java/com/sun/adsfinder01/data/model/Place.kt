@@ -50,6 +50,10 @@ data class Place(
         const val POSTER_TYPE = "posterType"
 
         const val DATE_CREATED = "dateCreated"
+
+        fun calculateAria(width: Double?, height: Double?): Double? {
+            return height?.let { width?.times(it) }
+        }
     }
 }
 

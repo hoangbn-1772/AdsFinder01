@@ -18,6 +18,7 @@ class HomeAdapter(
 ) :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
+    // Use for save or remove place when user click
     private var isSaved = false
 
     fun updatePlaces(places: List<Place>) = when {
@@ -52,6 +53,7 @@ class HomeAdapter(
         fun bind(place: Place) {
             binding.apply {
                 this.place = place
+                this.aria = Place.calculateAria(place.width, place.height)
                 this.executePendingBindings()
 
                 root.setOnClickListener {

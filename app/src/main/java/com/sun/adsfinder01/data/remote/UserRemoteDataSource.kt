@@ -16,8 +16,4 @@ class UserRemoteDataSource(private val apiService: ApiService) : UserDataSource.
     override fun register(account: Account?): Single<UserWrapper> {
         return apiService.register(account)
     }
-
-    override fun getPlaces(author: Int?, placeStatus: String?): Single<PlaceWrapper> {
-        return apiService.getPlaces(author, placeStatus)
-    }
 }

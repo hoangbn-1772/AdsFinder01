@@ -1,7 +1,6 @@
 package com.sun.adsfinder01.data.repository
 
 import com.sun.adsfinder01.data.model.Account
-import com.sun.adsfinder01.data.model.PlaceWrapper
 import com.sun.adsfinder01.data.model.UserWrapper
 import com.sun.adsfinder01.data.remote.UserRemoteDataSource
 import io.reactivex.Single
@@ -14,9 +13,5 @@ class UserRepository(private val userRemoteDataSource: UserRemoteDataSource) : U
 
     override fun register(account: Account?): Single<UserWrapper> {
         return userRemoteDataSource.register(account)
-    }
-
-    override fun getPlaces(author: Int?, placeStatus : String?): Single<PlaceWrapper> {
-        return userRemoteDataSource.getPlaces(author, placeStatus)
     }
 }

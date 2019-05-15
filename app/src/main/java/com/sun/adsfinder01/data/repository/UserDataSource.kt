@@ -11,7 +11,5 @@ interface UserDataSource {
         fun login(account: Account?): Single<UserWrapper>
 
         fun register(account: Account?): Single<UserWrapper>
-
-        fun getPlaces(author: Int?, placeStatus : String?): Single<PlaceWrapper>
     }
 }

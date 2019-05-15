@@ -77,20 +77,19 @@ class HomeFragment : Fragment() {
     private fun updatePlaces(places: List<Place>?) = when {
         places != null -> {
             adapter.updatePlaces(places)
-            showPlaces(true)
+            showPlaces()
         }
-        else -> showPlaces(false)
+        else -> hidePlaces()
     }
 
-    private fun showPlaces(isShow: Boolean) = when {
-        isShow -> {
-            binding.progressLoading.visibility = View.GONE
-            binding.imageEmpty.visibility = View.GONE
-        }
-        else -> {
-            binding.recyclerViewHome.visibility = View.GONE
-            binding.imageEmpty.visibility = View.VISIBLE
-        }
+    private fun showPlaces() {
+        binding.progressLoading.visibility = View.GONE
+        binding.imageEmpty.visibility = View.GONE
+    }
+
+    private fun hidePlaces() {
+        binding.recyclerViewHome.visibility = View.GONE
+        binding.imageEmpty.visibility = View.VISIBLE
     }
 
     companion object {

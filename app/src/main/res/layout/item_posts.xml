@@ -7,6 +7,10 @@
         <variable
             name="place"
             type="com.sun.adsfinder01.data.model.Place" />
+
+        <variable
+            name="aria"
+            type="Double" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -32,13 +36,13 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textWallType"
                 style="@style/TextContent"
-                setPlaceContent="@{place.wallType[0].type}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_8"
                 android:layout_marginStart="@dimen/dp_8"
                 android:ellipsize="marquee"
                 android:maxLines="@integer/max_line_1"
+                android:text="@{place.wallType[0].type ?? @string/updating}"
                 app:layout_constraintBottom_toTopOf="@+id/textPosterType"
                 app:layout_constraintEnd_toStartOf="@id/imageLike"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -48,29 +52,29 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textPosterType"
                 style="@style/TextContent"
-                setPlaceContent="@{place.address}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_8"
                 android:layout_marginStart="@dimen/dp_8"
                 android:ellipsize="marquee"
                 android:maxLines="@integer/max_line_1"
-                app:layout_constraintBottom_toTopOf="@+id/textSize"
+                android:text="@{place.address ?? @string/updating}"
+                app:layout_constraintBottom_toTopOf="@+id/textPlaceSize"
                 app:layout_constraintEnd_toStartOf="@id/imageLike"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@id/imagePosts"
                 app:layout_constraintTop_toBottomOf="@+id/textWallType" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textSize"
+                android:id="@+id/textPlaceSize"
                 style="@style/TextContent"
-                setPlaceSize="@{String.valueOf(place.width * place.height).concat(@string/place_unit)}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_8"
                 android:layout_marginStart="@dimen/dp_8"
                 android:ellipsize="marquee"
                 android:maxLines="@integer/max_line_1"
+                android:text="@{String.format(`%s %s %s`, @string/place_size ,String.valueOf(aria), @string/place_unit) ?? @string/updating}"
                 app:layout_constraintBottom_toTopOf="@+id/textDateCreate"
                 app:layout_constraintEnd_toStartOf="@id/imageLike"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -80,18 +84,18 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textDateCreate"
                 style="@style/TextContent"
-                setPlaceContent="@{place.dateCreated}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_8"
                 android:layout_marginStart="@dimen/dp_8"
                 android:ellipsize="end"
                 android:maxLines="@integer/max_line_1"
+                android:text="@{place.dateCreated ?? @string/updating}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/imageLike"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@id/imagePosts"
-                app:layout_constraintTop_toBottomOf="@+id/textSize" />
+                app:layout_constraintTop_toBottomOf="@+id/textPlaceSize" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageLike"
