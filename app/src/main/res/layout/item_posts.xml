@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="place"
-            type="com.sun.adsfinder01.data.model.Place" />
-    </data>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_140"
+    app:cardCornerRadius="@dimen/dp_4"
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_120"
-        android:orientation="vertical"
-        android:padding="@dimen/dp_4">
+        android:layout_height="match_parent">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imagePosts"
             android:layout_width="@dimen/dp_120"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/dp_120"
+            android:layout_margin="@dimen/dp_8"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textWallType"
             style="@style/TextContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_8"
             android:ellipsize="marquee"
             android:maxLines="@integer/max_line_1"
             app:layout_constraintBottom_toTopOf="@+id/textPosterType"
@@ -37,24 +36,28 @@
             app:layout_constraintStart_toEndOf="@id/imagePosts"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textPosterType"
             style="@style/TextContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_8"
             android:ellipsize="marquee"
             android:maxLines="@integer/max_line_1"
-            app:layout_constraintBottom_toTopOf="@+id/textSize"
+            app:layout_constraintBottom_toTopOf="@+id/textPlaceSize"
             app:layout_constraintEnd_toStartOf="@id/imageLike"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@id/imagePosts"
             app:layout_constraintTop_toBottomOf="@+id/textWallType" />
 
-        <TextView
-            android:id="@+id/textSize"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textPlaceSize"
             style="@style/TextContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_8"
             android:ellipsize="marquee"
             android:maxLines="@integer/max_line_1"
             app:layout_constraintBottom_toTopOf="@+id/textDateCreate"
@@ -63,23 +66,26 @@
             app:layout_constraintStart_toEndOf="@id/imagePosts"
             app:layout_constraintTop_toBottomOf="@+id/textPosterType" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textDateCreate"
             style="@style/TextContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_8"
             android:ellipsize="end"
             android:maxLines="@integer/max_line_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/imageLike"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@id/imagePosts"
-            app:layout_constraintTop_toBottomOf="@+id/textSize" />
+            app:layout_constraintTop_toBottomOf="@+id/textPlaceSize" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageLike"
             android:layout_width="@dimen/dp_24"
             android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/dp_4"
             android:src="@drawable/ic_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="h,1:1"
@@ -87,4 +93,4 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.cardview.widget.CardView>

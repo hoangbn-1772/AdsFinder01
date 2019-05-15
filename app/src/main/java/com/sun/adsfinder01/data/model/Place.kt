@@ -15,14 +15,18 @@ data class Place(
     @SerializedName(LAT) val lat: Double?,
     @SerializedName(LNG) val lng: Double?,
     @SerializedName(DESCRIPTION) val description: String?,
-    @SerializedName(WIDTH) val width: Int?,
-    @SerializedName(HEIGHT) val height: Int?,
+    @SerializedName(WIDTH) val width: Double?,
+    @SerializedName(HEIGHT) val height: Double?,
     @SerializedName(PRICE) val price: Price?,
     @SerializedName(CONSTRUCTION_PRICE) val constructionPrice: Double?,
     @SerializedName(WALL_TYPE) val wallType: List<WallType>?,
     @SerializedName(POSTER_TYPE) val posterType: List<PosterType>?,
     @SerializedName(DATE_CREATED) val dateCreated: String?
 ) : Parcelable {
+
+    fun calculateAria(): Double? {
+        return this.height?.let { width?.times(it) }
+    }
 
     companion object {
         const val ID = "id"

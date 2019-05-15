@@ -1,17 +1,29 @@
 package com.sun.adsfinder01.ui.home
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sun.adsfinder01.R
 import com.sun.adsfinder01.data.model.Place
-import com.sun.adsfinder01.databinding.ItemPostsBinding
 import com.sun.adsfinder01.util.autoNotify
+import kotlinx.android.synthetic.main.item_posts.view.imageLike
+import kotlinx.android.synthetic.main.item_posts.view.imagePosts
+import kotlinx.android.synthetic.main.item_posts.view.textDateCreate
+import kotlinx.android.synthetic.main.item_posts.view.textPlaceSize
+import kotlinx.android.synthetic.main.item_posts.view.textPosterType
+import kotlinx.android.synthetic.main.item_posts.view.textWallType
 
-class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
-
-    private var data: List<Place> = ArrayList()
+class HomeAdapter(
+    private var data: List<Place>,
+    @NonNull private val itemOnClick: (place: Place) -> Unit,
+    @NonNull private val savePlaceOnClick: (place: Place, status: Boolean) -> Unit
+) :
+    RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     fun updatePlaces(places: List<Place>) = when {
         data.isNullOrEmpty() -> {
@@ -24,14 +36,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        val binding: ItemPostsBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context),
-            R.layout.item_posts,
-            parent,
-            false
-        )
-        // Binding callback here
-        return HomeViewHolder(binding)
+        return HomeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_posts, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -42,8 +47,48 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
         holder.bind(data[position])
     }
 
-    inner class HomeViewHolder(private val binding: ItemPostsBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         fun bind(place: Place) {
+            itemView.run {
+
+                textWallType.text = place.wallType?.get(0)?.type
+                textPosterType.text = place.posterType?.get(0)?.type
+                textDateCreate.text = place.dateCreated
+                showPlaceSize(place, textPlaceSize)
+                showPlaceImage(place.imageUrl, imagePosts)
+
+                setOnClickListener {
+                    itemOnClick(place)
+                }
+
+                imageLike.setOnClickListener {
+                    onSavePlace(place)
+                }
+            }
+        }
+
+        private fun showPlaceImage(uri: String?, imageView: ImageView) {
+            Glide.with(imageView)
+                .load(uri)
+                .centerCrop()
+                .placeholder(R.drawable.image_empty)
+                .error(R.drawable.image_empty)
+                .into(imageView)
+        }
+
+        private fun showPlaceSize(place: Place, textView: TextView) {
+            val placeSize = StringBuilder()
+            placeSize.append(itemView.resources.getString(R.string.place_size))
+            placeSize.append("\t")
+            placeSize.append(place.calculateAria())
+            placeSize.append("\t")
+            placeSize.append(itemView.resources.getString(R.string.place_unit))
+            textView.text = placeSize.toString()
+        }
+
+        private fun onSavePlace(place: Place) {
+            // save or remove place when user click
         }
     }
 }

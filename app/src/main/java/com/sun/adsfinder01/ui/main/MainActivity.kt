@@ -131,6 +131,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     companion object {
+
         const val EXTRA_USER = "com.sun.adsfinder01.ui.main.EXTRA_USER"
 
         fun getMainIntent(context: Context, user: User?): Intent {
