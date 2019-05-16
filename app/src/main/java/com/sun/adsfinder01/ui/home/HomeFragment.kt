@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
     private fun onClickPlaceItem(place: Place?) {
         activity?.supportFragmentManager
             ?.beginTransaction()
-            ?.replace(R.id.drawer_layout, PlaceDetailFragment.newInstance(place))
+            ?.replace(R.id.drawer_layout, PlaceDetailFragment.newInstance(user, place))
             ?.addToBackStack("")
             ?.commit()
     }
@@ -148,7 +148,7 @@ class HomeFragment : Fragment() {
 
     companion object {
 
-        private const val ARGUMENT_USER = "ARGUMENT_USER"
+        const val ARGUMENT_USER = "ARGUMENT_USER"
 
         fun newInstance(user: User?) = HomeFragment().apply {
             arguments = Bundle().apply {

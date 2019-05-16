@@ -54,5 +54,14 @@
     <string name="place_aria">Diện tích</string>
     <string name="menu_call">Gọi điện</string>
     <string name="menu_contract">Tạo hợp đồng</string>
+    <string name="start_date">Ngày bắt đầu</string>
+    <string name="end_date">Ngày kết thúc</string>
+    <string name="note">Ghi chú</string>
+    <string name="place_info">Thông tin địa điểm:</string>
+    <string name="place_code">Mã địa điểm</string>
+    <string name="customer_code">Mã khách hàng</string>
+    <string name="customer_info">Thông tin khách hàng:</string>
+    <string name="customer_name">Tên khách hàng</string>
+    <string name="contract_info">Thông tin thuê:</string>
 
 </resources>

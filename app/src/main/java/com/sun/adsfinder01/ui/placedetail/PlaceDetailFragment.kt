@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.sun.adsfinder01.R
 import com.sun.adsfinder01.data.model.Place
+import com.sun.adsfinder01.data.model.User
+import com.sun.adsfinder01.ui.contract.ContractFragment
+import com.sun.adsfinder01.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.fragment_place_detail.floating_contact
 import kotlinx.android.synthetic.main.fragment_place_detail.floating_contract
 import kotlinx.android.synthetic.main.fragment_place_detail.imagePlace
@@ -25,6 +28,7 @@ import kotlinx.android.synthetic.main.fragment_place_detail.textWallType
 class PlaceDetailFragment : Fragment(), OnClickListener {
 
     private val place by lazy { arguments?.getParcelable(ARGUMENT_PLACE) as Place }
+    private val user by lazy { arguments?.getParcelable(HomeFragment.ARGUMENT_USER) as User }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_place_detail, container, false)
@@ -149,17 +153,22 @@ class PlaceDetailFragment : Fragment(), OnClickListener {
     }
 
     private fun handleContract() {
-        // Create a contract
+        activity?.supportFragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.drawer_layout, ContractFragment.newInstance(user, place))
+            ?.addToBackStack("")
+            ?.commit()
     }
 
     companion object {
 
-        private const val ARGUMENT_PLACE = "ARGUMENT_PLACE"
+        const val ARGUMENT_PLACE = "ARGUMENT_PLACE"
 
         @JvmStatic
-        fun newInstance(place: Place?) = PlaceDetailFragment().apply {
+        fun newInstance(user: User?, place: Place?) = PlaceDetailFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(ARGUMENT_PLACE, place)
+                putParcelable(HomeFragment.ARGUMENT_USER, user)
             }
         }
     }
