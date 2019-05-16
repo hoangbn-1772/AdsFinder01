@@ -39,13 +39,15 @@
                     android:src="@drawable/ic_search" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textPlaceSearch"
                     style="@style/TextContent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toEndOf="@id/imageIconSearch"
                     android:background="@drawable/boder_search_pressed"
+                    android:ellipsize="end"
                     android:gravity="center_vertical"
-                    android:text="@string/search" />
+                    android:maxLines="@integer/max_line_1" />
             </RelativeLayout>
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>

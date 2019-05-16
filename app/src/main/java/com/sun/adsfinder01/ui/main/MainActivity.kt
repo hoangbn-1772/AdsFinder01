@@ -17,6 +17,7 @@ import com.google.android.material.navigation.NavigationView
 import com.sun.adsfinder01.R
 import com.sun.adsfinder01.data.model.User
 import com.sun.adsfinder01.ui.home.HomeFragment
+import com.sun.adsfinder01.ui.save.PlaceSaveFragment
 import com.sun.adsfinder01.ui.search.SearchFragment
 import kotlinx.android.synthetic.main.app_bar_home.bottomNavigation
 import kotlinx.android.synthetic.main.app_bar_home.root_search
@@ -50,6 +51,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_like -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.drawer_layout, PlaceSaveFragment())
+                    .addToBackStack("")
+                    .commit()
             }
 
             R.id.nav_contract -> {

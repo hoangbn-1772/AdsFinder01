@@ -49,11 +49,11 @@
     <string name="save_place_failure">Địa điểm này đã được lưu</string>
     <string name="remove_place_success">Đã bỏ lưu</string>
     <string name="remove_place_failure">Địa điểm này đã được xóa</string>
-    <string name="place_width">Chiều dài (0–20m):</string>
-    <string name="place_height">Chiều rộng (0–20m):</string>
+    <string name="place_width">Chiều dài (0–20m)</string>
+    <string name="place_height">Chiều rộng (0–20m)</string>
     <string name="place_aria">Diện tích</string>
     <string name="menu_call">Gọi điện</string>
-    <string name="menu_contract">Tạo hợp đồng</string>
+    <string name="menu_contract">Hợp đồng</string>
     <string name="start_date">Ngày bắt đầu</string>
     <string name="end_date">Ngày kết thúc</string>
     <string name="note">Ghi chú</string>
@@ -79,4 +79,5 @@
     <string name="user_location_permission_explanation">Ứng dụng cần quyền truy cập vị trí để hiển thị chức năng</string>
     <string name="user_location_permission_not_granted">Bạn đã không cấp quyền vị trí</string>
     <string name="menu_direction">Chỉ đường</string>
+    <string name="place_save_screen">Địa điểm đã lưu</string>
 </resources>
