@@ -49,8 +49,8 @@
     <string name="save_place_failure">Địa điểm này đã được lưu</string>
     <string name="remove_place_success">Đã bỏ lưu</string>
     <string name="remove_place_failure">Địa điểm này đã được xóa</string>
-    <string name="place_width">Chiều rộng</string>
-    <string name="place_height">Chiều dài</string>
+    <string name="place_width">Chiều dài (0–20m):</string>
+    <string name="place_height">Chiều rộng (0–20m):</string>
     <string name="place_aria">Diện tích</string>
     <string name="menu_call">Gọi điện</string>
     <string name="menu_contract">Tạo hợp đồng</string>
@@ -63,5 +63,16 @@
     <string name="customer_info">Thông tin khách hàng:</string>
     <string name="customer_name">Tên khách hàng</string>
     <string name="contract_info">Thông tin thuê:</string>
+    <string name="poster_type">Loại Poster</string>
+    <string name="poster_type_1">Poster dán tường</string>
+    <string name="poster_type_2">Poster vẽ tường</string>
+    <string name="poster_type_3">Poster điện tử</string>
+    <string name="wall_type">Loại tường</string>
+    <string name="wall_type_1">Tường quán cà phê</string>
+    <string name="wall_type_2">Bảng tin, tường khu dân cư, đô thị</string>
+    <string name="wall_type_3">Bảng tin, tường khu văn phòng</string>
+    <string name="price_limit">Từ 0–10tr: </string>
+    <string name="action_search">Tìm kiếm</string>
+    <string name="price_unit">tr</string>
 
 </resources>
