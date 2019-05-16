@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imagePrevious"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/color_primary"
+        android:padding="@dimen/dp_16"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitleScreen"
+        style="@style/AppSlogan"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/color_primary"
+        android:gravity="center_vertical"
+        android:text="@string/place_detail_screen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imagePrevious"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textPicture"
+        style="@style/ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_16"
+        android:background="@color/color_blue"
+        android:paddingStart="@dimen/dp_8"
+        android:text="@string/picture"
+        app:layout_constraintEnd_toStartOf="@id/gl_4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTitleScreen" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imagePlace"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/dp_8"
+        app:layout_constraintBottom_toBottomOf="@id/gl_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textPicture" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textDescription"
+        style="@style/ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_8"
+        android:background="@color/color_blue"
+        android:paddingStart="@dimen/dp_8"
+        android:text="@string/description"
+        app:layout_constraintEnd_toStartOf="@id/gl_4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_1" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textWallType"
+        style="@style/TextContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_3"
+        app:layout_constraintTop_toBottomOf="@id/textDescription" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textPosterType"
+        style="@style/TextContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_3"
+        app:layout_constraintTop_toBottomOf="@id/textWallType" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textAddress"
+        style="@style/TextContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_3"
+        app:layout_constraintTop_toBottomOf="@id/textPosterType" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitleSize"
+        style="@style/TextContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        android:text="@string/place_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_3"
+        app:layout_constraintTop_toBottomOf="@id/textAddress" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textPlaceWidth"
+        style="@style/TextContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/gl_4"
+        app:layout_constraintTop_toBottomOf="@id/textTitleSize" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textPlaceHeight"
+        style="@style/TextContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/gl_4"
+        app:layout_constraintTop_toBottomOf="@id/textPlaceWidth" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textPlaceAria"
+        style="@style/TextContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/gl_4"
+        app:layout_constraintTop_toBottomOf="@id/textPlaceHeight" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textDateCreated"
+        style="@style/TextContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_3"
+        app:layout_constraintTop_toBottomOf="@id/textPlaceAria" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textPrice"
+        style="@style/TextContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_3"
+        app:layout_constraintTop_toBottomOf="@id/textDateCreated" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTotalPrice"
+        style="@style/TextContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        android:textColor="@color/color_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gl_3"
+        app:layout_constraintTop_toBottomOf="@id/gl_2" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu_function"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu_icon="@drawable/ic_list"
+        fab:menu_animationDelayPerItem="0"
+        fab:menu_labels_hideAnimation="@anim/jump_to_down"
+        fab:menu_labels_showAnimation="@anim/jump_from_down">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floating_contact"
+            style="@style/MenuLabelsStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_call"
+            app:fab_colorDisabled="@color/color_blue"
+            app:fab_colorNormal="@color/color_blue"
+            app:fab_label="@string/menu_call"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floating_contract"
+            style="@style/MenuLabelsStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_contract"
+            app:fab_colorNormal="@color/color_blue"
+            app:fab_label="@string/menu_contract"
+            app:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

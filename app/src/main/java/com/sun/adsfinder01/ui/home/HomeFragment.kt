@@ -13,6 +13,7 @@ import com.sun.adsfinder01.data.model.NetworkStatus.ERROR
 import com.sun.adsfinder01.data.model.NetworkStatus.SUCCESS
 import com.sun.adsfinder01.data.model.Place
 import com.sun.adsfinder01.data.model.User
+import com.sun.adsfinder01.ui.placedetail.PlaceDetailFragment
 import com.sun.adsfinder01.util.ContextExtension.showMessage
 import kotlinx.android.synthetic.main.fragment_home.imageEmpty
 import kotlinx.android.synthetic.main.fragment_home.progressLoading
@@ -45,7 +46,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun onClickPlaceItem(place: Place?) {
-        // Show place detail
+        activity?.supportFragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.drawer_layout, PlaceDetailFragment.newInstance(place))
+            ?.addToBackStack("")
+            ?.commit()
     }
 
     private fun handleLikePost(place: Place?, status: Boolean) {
