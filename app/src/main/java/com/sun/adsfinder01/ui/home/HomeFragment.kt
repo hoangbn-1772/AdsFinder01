@@ -82,7 +82,7 @@ class HomeFragment : Fragment() {
         })
 
         homeViewModel.removePlaceLiveData.observe(this, Observer { response ->
-            removePlace(response, response.message)
+            removePlace(response)
         })
     }
 
@@ -119,28 +119,16 @@ class HomeFragment : Fragment() {
 
     private fun savePlace(response: ApiResponse<Boolean>) {
         when (response.status) {
-            SUCCESS -> response.data?.let { notifySavePlace(it) }
+            SUCCESS -> context?.showMessage(resources.getString(R.string.save_place_success))
             ERROR -> showError(response.message)
         }
     }
 
-    private fun removePlace(response: ApiResponse<Boolean>, msg: String) {
+    private fun removePlace(response: ApiResponse<Boolean>) {
         when (response.status) {
-            SUCCESS -> response.data?.let { notifyRemovePlace(it) }
-            ERROR -> context?.showMessage(msg)
+            SUCCESS -> context?.showMessage(resources.getString(R.string.remove_place_success))
+            ERROR -> context?.showMessage(response.message)
         }
-    }
-
-    private fun notifySavePlace(isSuccess: Boolean) = when {
-        isSuccess -> context?.showMessage(resources.getString(R.string.save_place_success))
-        else -> context?.showMessage(resources.getString(R.string.save_place_failure))
-    }
-
-    private fun notifyRemovePlace(isSuccess: Boolean) = when {
-        isSuccess -> {
-            context?.showMessage(resources.getString(R.string.remove_place_success))
-        }
-        else -> context?.showMessage(resources.getString(R.string.remove_place_failure))
     }
 
     private fun showError(error: String) {

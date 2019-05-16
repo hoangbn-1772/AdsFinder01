@@ -3,6 +3,7 @@
     package="com.sun.adsfinder01">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".MainApplication"
@@ -22,14 +23,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".ui.register.RegistrationActivity" />
-
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.placedetail.DirectionPlaceActivity"/>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.sun.adsfinder01.data.repository
 import com.sun.adsfinder01.data.model.Place
 import com.sun.adsfinder01.data.model.Seeker
 import com.sun.adsfinder01.data.remote.PlaceRemoteDataSource
+import io.reactivex.Completable
 import io.reactivex.Single
 
 class PlaceRepository(private val placeRemoteDataSource: PlaceRemoteDataSource) :
@@ -12,11 +13,11 @@ class PlaceRepository(private val placeRemoteDataSource: PlaceRemoteDataSource) 
         return placeRemoteDataSource.getPlaces(author, placeStatus)
     }
 
-    override fun savePlace(author: Int?, placeId: Int?): Single<Boolean> {
+    override fun savePlace(author: Int?, placeId: Int?): Completable {
         return placeRemoteDataSource.savePlace(author, placeId)
     }
 
-    override fun removePlace(author: Int?, placeId: Int?): Single<Boolean> {
+    override fun removePlace(author: Int?, placeId: Int?): Completable {
         return placeRemoteDataSource.removePlace(author, placeId)
     }
 
