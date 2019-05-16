@@ -35,7 +35,23 @@
     <string name="menu_here">Gần đây</string>
     <string name="menu_notification">Thông báo</string>
     <string name="search">Tìm kiếm địa điểm</string>
-    <string name="place_size">Kích thước:</string>
+    <string name="place_size">Kích thước</string>
     <string name="place_unit">m2</string>
     <string name="updating">Đang cập nhật</string>
+    <string name="place_detail_screen">Thông tin chi tiết</string>
+    <string name="picture">Ảnh</string>
+    <string name="description">Mô tả</string>
+    <string name="address">Địa chỉ</string>
+    <string name="date_created">Ngày tạo</string>
+    <string name="price">Giá</string>
+    <string name="total_price">Tổng giá</string>
+    <string name="separate">: </string>
+    <string name="save_place_success">Đã lưu</string>
+    <string name="save_place_failure">Địa điểm này đã được lưu</string>
+    <string name="remove_place_success">Đã bỏ lưu</string>
+    <string name="remove_place_failure">Địa điểm này đã được xóa</string>
+    <string name="place_width">Chiều rộng</string>
+    <string name="place_height">Chiều dài</string>
+    <string name="place_aria">Diện tích</string>
+
 </resources>
