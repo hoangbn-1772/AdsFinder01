@@ -22,6 +22,15 @@ interface ApiService {
         const val CATEGORY = "category"
         const val FAVORITE_PLACE = "place/favorite"
         const val PLACE_ID = "id_place"
+        const val SEARCH_PLACE = "place/search"
+        const val LAT = "lat"
+        const val LNG = "lng"
+        const val POSTER_ID = "id_poster"
+        const val WALL_ID = "id_wall"
+        const val MAX_WIDTH = "max_width"
+        const val MAX_HEIGHT = "max_height"
+        const val MAX_PRICE = "max_price"
+        const val DISTANCE = "distance"
     }
 
     @POST(LOGIN)
@@ -38,4 +47,17 @@ interface ApiService {
 
     @DELETE(FAVORITE_PLACE)
     fun removePlace(@Header(AUTHOR) author: Int?, @Query(PLACE_ID) placeId: Int?): Single<PlaceWrapper>
+
+    @GET(SEARCH_PLACE)
+    fun findPlaces(
+        @Header(AUTHOR) author: Int?,
+        @Query(LAT) lat: Double,
+        @Query(LNG) lng: Double,
+        @Query(POSTER_ID) posterId: String,
+        @Query(WALL_ID) wallId: String,
+        @Query(MAX_WIDTH) maxWidth: Int,
+        @Query(MAX_HEIGHT) maxHeight: Int,
+        @Query(MAX_PRICE) maxPrice: Int,
+        @Query(DISTANCE) distance: Int
+    ): Single<PlaceWrapper>
 }
