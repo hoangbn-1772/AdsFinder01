@@ -10,4 +10,12 @@ class PlaceRemoteDataSource(private val apiService: ApiService) : PlaceDataSourc
     override fun getPlaces(author: Int?, placeStatus: String?): Single<List<Place>> {
         return apiService.getPlaces(author, placeStatus).map { it.data }
     }
+
+    override fun savePlace(author: Int?, placeId: Int?): Single<Boolean> {
+        return apiService.savePlace(author, placeId).map { it.success }
+    }
+
+    override fun removePlace(author: Int?, placeId: Int?): Single<Boolean> {
+        return apiService.removePlace(author, placeId).map { it.success }
+    }
 }

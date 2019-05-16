@@ -10,4 +10,12 @@ class PlaceRepository(private val placeRemoteDataSource: PlaceRemoteDataSource) 
     override fun getPlaces(author: Int?, placeStatus: String?): Single<List<Place>> {
         return placeRemoteDataSource.getPlaces(author, placeStatus)
     }
+
+    override fun savePlace(author: Int?, placeId: Int?): Single<Boolean> {
+        return placeRemoteDataSource.savePlace(author, placeId)
+    }
+
+    override fun removePlace(author: Int?, placeId: Int?): Single<Boolean> {
+        return placeRemoteDataSource.removePlace(author, placeId)
+    }
 }

@@ -45,13 +45,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun onClickPlaceItem(place: Place?) {
-        // Item click
-        context?.showMessage(place?.address!!)
+        // Show place detail
     }
 
     private fun handleLikePost(place: Place?, status: Boolean) {
-        // Icon save click
-        context?.showMessage(place?.dateCreated!!)
+        when {
+            status -> {
+                homeViewModel.savePlace(user.id, place?.id)
+            }
+            else -> {
+                homeViewModel.removePlace(user.id, place?.id)
+            }
+        }
     }
 
     private fun initComponents() {
@@ -64,6 +69,14 @@ class HomeFragment : Fragment() {
     private fun doObserve() {
         homeViewModel.placeLiveData.observe(this, Observer { response ->
             handleResponse(response)
+        })
+
+        homeViewModel.savePlaceLiveData.observe(this, Observer { response ->
+            savePlace(response)
+        })
+
+        homeViewModel.removePlaceLiveData.observe(this, Observer { response ->
+            removePlace(response, response.message)
         })
     }
 
@@ -98,7 +111,38 @@ class HomeFragment : Fragment() {
         imageEmpty.visibility = View.VISIBLE
     }
 
+    private fun savePlace(response: ApiResponse<Boolean>) {
+        when (response.status) {
+            SUCCESS -> response.data?.let { notifySavePlace(it) }
+            ERROR -> showError(response.message)
+        }
+    }
+
+    private fun removePlace(response: ApiResponse<Boolean>, msg: String) {
+        when (response.status) {
+            SUCCESS -> response.data?.let { notifyRemovePlace(it) }
+            ERROR -> context?.showMessage(msg)
+        }
+    }
+
+    private fun notifySavePlace(isSuccess: Boolean) = when {
+        isSuccess -> context?.showMessage(resources.getString(R.string.save_place_success))
+        else -> context?.showMessage(resources.getString(R.string.save_place_failure))
+    }
+
+    private fun notifyRemovePlace(isSuccess: Boolean) = when {
+        isSuccess -> {
+            context?.showMessage(resources.getString(R.string.remove_place_success))
+        }
+        else -> context?.showMessage(resources.getString(R.string.remove_place_failure))
+    }
+
+    private fun showError(error: String) {
+        context?.showMessage(error)
+    }
+
     companion object {
+
         private const val ARGUMENT_USER = "ARGUMENT_USER"
 
         fun newInstance(user: User?) = HomeFragment().apply {

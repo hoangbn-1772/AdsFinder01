@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.sun.adsfinder01.R
 import com.sun.adsfinder01.data.model.Place
 import com.sun.adsfinder01.util.autoNotify
+import kotlinx.android.synthetic.main.item_posts.imageLike
 import kotlinx.android.synthetic.main.item_posts.view.imageLike
 import kotlinx.android.synthetic.main.item_posts.view.imagePosts
 import kotlinx.android.synthetic.main.item_posts.view.textDateCreate
@@ -50,6 +51,9 @@ class HomeAdapter(
     inner class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(place: Place) {
+            // Use for save place or remove place when user click
+            var isSaved = false
+
             itemView.run {
 
                 textWallType.text = place.wallType?.get(0)?.type
@@ -63,7 +67,7 @@ class HomeAdapter(
                 }
 
                 imageLike.setOnClickListener {
-                    onSavePlace(place)
+                    isSaved = onSavePlace(place, isSaved)
                 }
             }
         }
@@ -87,8 +91,25 @@ class HomeAdapter(
             textView.text = placeSize.toString()
         }
 
-        private fun onSavePlace(place: Place) {
-            // save or remove place when user click
+        private fun onSavePlace(place: Place, isSaved: Boolean): Boolean = when {
+            !isSaved -> {
+                savePlaceOnClick(place, true)
+                showIconSavePlace()
+                true
+            }
+            else -> {
+                savePlaceOnClick(place, false)
+                showIconRemovePlace()
+                false
+            }
+        }
+
+        private fun showIconSavePlace(){
+            itemView.imageLike?.setImageResource(R.drawable.ic_star_selected)
+        }
+
+        private fun showIconRemovePlace(){
+            itemView.imageLike?.setImageResource(R.drawable.ic_star)
         }
     }
 }
