@@ -30,32 +30,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textAppName" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editUserEmail"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textUserEmail"
         style="@style/InputLogin"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_48"
-        android:inputType="textEmailAddress"
-        android:paddingStart="@dimen/dp_8"
-        android:textCursorDrawable="@null"
+        android:hint="@string/email_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_hz2"
-        tools:ignore="RtlSymmetry" />
+        app:layout_constraintTop_toBottomOf="@id/guideline_hz2">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editUserPassword"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editUserEmail"
+            style="@style/InputLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_8"
+            android:background="@null"
+            android:inputType="textEmailAddress"
+            android:textCursorDrawable="@null" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textUserPassword"
         style="@style/InputLogin"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_48"
         android:layout_marginTop="@dimen/dp_16"
-        android:inputType="textPassword"
-        android:paddingStart="@dimen/dp_8"
-        android:textCursorDrawable="@null"
+        android:hint="@string/password_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editUserEmail"
-        tools:ignore="RtlSymmetry" />
+        app:layout_constraintTop_toBottomOf="@id/textUserEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editUserPassword"
+            style="@style/InputLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_8"
+            android:background="@null"
+            android:inputType="textPassword"
+            android:textCursorDrawable="@null" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLogin"

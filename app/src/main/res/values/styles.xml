@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorPrimaryDark">@color/color_second_primary</item>
         <item name="colorAccent">@color/color_red</item>
     </style>
 
@@ -65,6 +65,12 @@
     <style name="TextContent">
         <item name="android:textSize">@dimen/sp_14</item>
         <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
+
+    <style name="MenuLabelsStyle" parent="CommonText">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:maxLines">@integer/max_line_1</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
 </resources>
