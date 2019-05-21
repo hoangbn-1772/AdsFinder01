@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imagePrevious"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:padding="@dimen/dp_16"
+                android:src="@drawable/ic_back" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textTitleContract"
+                style="@style/AppSlogan"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_toEndOf="@id/imagePrevious"
+                android:gravity="center_vertical"
+                android:text="@string/menu_contract" />
+        </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dp_16"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textUserInfo"
+            style="@style/Notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_4"
+            android:text="@string/customer_info"
+            android:textColor="@color/color_black" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textFieldUserId"
+            style="@style/TextContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textUserInfo"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/customer_code" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textUserId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textUserInfo"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_toEndOf="@+id/textFieldUserId"
+            android:gravity="end" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textFieldUserName"
+            style="@style/TextContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textFieldUserId"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/customer_name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textFieldUserId"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_toEndOf="@+id/textFieldUserName"
+            android:gravity="end" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textPlaceInfo"
+            style="@style/Notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textUserName"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/place_info"
+            android:textColor="@color/color_black" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textFieldPlaceId"
+            style="@style/TextContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textPlaceInfo"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/place_code" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textPlaceId"
+            style="@style/TextContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textPlaceInfo"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_toEndOf="@id/textFieldPlaceId"
+            android:gravity="end" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textFieldPlaceAddress"
+            style="@style/TextContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textFieldPlaceId"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/address" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textPlaceAddress"
+            style="@style/TextContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textFieldPlaceId"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_toEndOf="@+id/textFieldPlaceAddress"
+            android:gravity="end"
+            tool:text="Dia chi" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textContent"
+            style="@style/Notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textFieldPlaceAddress"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/contract_info"
+            android:textColor="@color/color_black" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textFieldStartDate"
+            style="@style/TextContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textContent"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/start_date" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textStartDate"
+            style="@style/TextContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textContent"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_toEndOf="@id/textFieldStartDate"
+            android:gravity="end"
+            android:hint="@string/start_date"
+            android:textColorHint="@color/color_primary"
+            android:textStyle="italic" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textFieldEndDate"
+            style="@style/TextContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textStartDate"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/end_date" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textEndDate"
+            style="@style/TextContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textStartDate"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_toEndOf="@id/textFieldEndDate"
+            android:gravity="end"
+            android:hint="@string/end_date"
+            android:textColorHint="@color/color_primary"
+            android:textStyle="italic" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textFieldNote"
+            style="@style/TextContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textEndDate"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/note" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/textNote"
+            style="@style/TextContent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_120"
+            android:layout_below="@+id/textFieldNote"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@drawable/border_text"
+            android:ellipsize="end"
+            android:gravity="top"
+            android:hint="@string/note"
+            android:maxLines="@integer/max_line_5"
+            android:padding="@dimen/dp_4"
+            android:textStyle="italic" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonContract"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/menu_contract"
+            android:textColor="@color/color_white"
+            app:icon="@drawable/ic_cart"
+            app:iconGravity="textStart"
+            app:iconPadding="@dimen/dp_16" />
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
