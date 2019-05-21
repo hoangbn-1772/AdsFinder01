@@ -11,7 +11,7 @@ import com.sun.adsfinder01.R
 import com.sun.adsfinder01.data.model.Place
 import com.sun.adsfinder01.data.model.User
 import com.sun.adsfinder01.ui.contract.ContractFragment
-import com.sun.adsfinder01.ui.home.HomeFragment
+import com.sun.adsfinder01.util.Constants
 import kotlinx.android.synthetic.main.fragment_place_detail.floating_contact
 import kotlinx.android.synthetic.main.fragment_place_detail.floating_contract
 import kotlinx.android.synthetic.main.fragment_place_detail.imagePlace
@@ -27,8 +27,8 @@ import kotlinx.android.synthetic.main.fragment_place_detail.textWallType
 
 class PlaceDetailFragment : Fragment(), OnClickListener {
 
-    private val place by lazy { arguments?.getParcelable(ARGUMENT_PLACE) as Place }
-    private val user by lazy { arguments?.getParcelable(HomeFragment.ARGUMENT_USER) as User }
+    private val place by lazy { arguments?.getParcelable(Constants.ARGUMENT_PLACE) as Place }
+    private val user by lazy { arguments?.getParcelable(Constants.ARGUMENT_USER) as User }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_place_detail, container, false)
@@ -162,13 +162,11 @@ class PlaceDetailFragment : Fragment(), OnClickListener {
 
     companion object {
 
-        const val ARGUMENT_PLACE = "ARGUMENT_PLACE"
-
         @JvmStatic
         fun newInstance(user: User?, place: Place?) = PlaceDetailFragment().apply {
             arguments = Bundle().apply {
-                putParcelable(ARGUMENT_PLACE, place)
-                putParcelable(HomeFragment.ARGUMENT_USER, user)
+                putParcelable(Constants.ARGUMENT_PLACE, place)
+                putParcelable(Constants.ARGUMENT_USER, user)
             }
         }
     }

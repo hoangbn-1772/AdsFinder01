@@ -9,8 +9,7 @@ import androidx.fragment.app.Fragment
 import com.sun.adsfinder01.R
 import com.sun.adsfinder01.data.model.Place
 import com.sun.adsfinder01.data.model.User
-import com.sun.adsfinder01.ui.home.HomeFragment
-import com.sun.adsfinder01.ui.placedetail.PlaceDetailFragment
+import com.sun.adsfinder01.util.Constants
 import kotlinx.android.synthetic.main.fragment_contract.buttonContract
 import kotlinx.android.synthetic.main.fragment_contract.textEndDate
 import kotlinx.android.synthetic.main.fragment_contract.textPlaceAddress
@@ -21,9 +20,9 @@ import kotlinx.android.synthetic.main.fragment_contract.textUserName
 
 class ContractFragment : Fragment(), OnClickListener {
 
-    private val user by lazy { arguments?.getParcelable(HomeFragment.ARGUMENT_USER) as User }
+    private val user by lazy { arguments?.getParcelable(Constants.ARGUMENT_USER) as User }
 
-    private val place by lazy { arguments?.getParcelable(PlaceDetailFragment.ARGUMENT_PLACE) as Place }
+    private val place by lazy { arguments?.getParcelable(Constants.ARGUMENT_PLACE) as Place }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_contract, container, false)
@@ -67,8 +66,8 @@ class ContractFragment : Fragment(), OnClickListener {
 
         fun newInstance(user: User?, place: Place) = ContractFragment().apply {
             arguments = Bundle().apply {
-                putParcelable(PlaceDetailFragment.ARGUMENT_PLACE, place)
-                putParcelable(HomeFragment.ARGUMENT_USER, user)
+                putParcelable(Constants.ARGUMENT_PLACE, place)
+                putParcelable(Constants.ARGUMENT_USER, user)
             }
         }
     }

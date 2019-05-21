@@ -14,6 +14,7 @@ import com.sun.adsfinder01.data.model.NetworkStatus.SUCCESS
 import com.sun.adsfinder01.data.model.Place
 import com.sun.adsfinder01.data.model.User
 import com.sun.adsfinder01.ui.placedetail.PlaceDetailFragment
+import com.sun.adsfinder01.util.Constants
 import com.sun.adsfinder01.util.ContextExtension.showMessage
 import kotlinx.android.synthetic.main.fragment_home.imageEmpty
 import kotlinx.android.synthetic.main.fragment_home.progressLoading
@@ -24,7 +25,7 @@ class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModel()
 
-    private val user by lazy { arguments?.get(ARGUMENT_USER) as User }
+    private val user by lazy { arguments?.get(Constants.ARGUMENT_USER) as User }
 
     private val homeAdapter by lazy {
         HomeAdapter(
@@ -148,12 +149,10 @@ class HomeFragment : Fragment() {
 
     companion object {
 
-        const val ARGUMENT_USER = "ARGUMENT_USER"
-
         fun newInstance(user: User?) = HomeFragment().apply {
             arguments = Bundle().apply {
                 user?.let {
-                    putParcelable(ARGUMENT_USER, user)
+                    putParcelable(Constants.ARGUMENT_USER, user)
                 }
             }
         }
