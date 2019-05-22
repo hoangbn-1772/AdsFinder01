@@ -3,6 +3,7 @@
     package="com.sun.adsfinder01">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MainApplication"
         android:allowBackup="true"

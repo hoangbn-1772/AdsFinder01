@@ -28,6 +28,7 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
             <RelativeLayout
+                android:id="@+id/root_search"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_marginStart="@dimen/dp_56"
@@ -39,7 +40,7 @@
                     android:id="@+id/imageIconSearch"
                     android:layout_width="@dimen/dp_48"
                     android:layout_height="@dimen/dp_48"
-                    android:background="@color/color_white"
+                    android:background="@drawable/boder_search_pressed"
                     android:padding="@dimen/dp_12"
                     android:src="@drawable/ic_search" />
 
@@ -48,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toEndOf="@id/imageIconSearch"
-                    android:background="@color/color_white"
+                    android:background="@drawable/boder_search_pressed"
                     android:gravity="center_vertical"
                     android:text="@string/search" />
             </RelativeLayout>

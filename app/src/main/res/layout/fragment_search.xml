@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imagePrevious"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:padding="@dimen/dp_16"
+                android:src="@drawable/ic_back" />
+
+            <RelativeLayout
+                android:id="@+id/root_search"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_toEndOf="@id/imagePrevious"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/dp_8">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageIconSearch"
+                    android:layout_width="@dimen/dp_48"
+                    android:layout_height="@dimen/dp_48"
+                    android:background="@drawable/boder_search_pressed"
+                    android:padding="@dimen/dp_12"
+                    android:src="@drawable/ic_search" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/imageIconSearch"
+                    android:background="@drawable/boder_search_pressed"
+                    android:gravity="center_vertical"
+                    android:text="@string/search" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dp_8"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textPosterType"
+            style="@style/SearchFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/poster_type"
+            android:textColor="@color/color_black" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textPosterType1"
+            style="@style/TextContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textPosterType"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_4"
+            android:text="@string/poster_type_1" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkboxPosterType1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_24"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/textPosterType"
+            android:layout_marginEnd="@dimen/dp_16" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textPosterType2"
+            style="@style/TextContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkboxPosterType1"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_4"
+            android:text="@string/poster_type_2" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkboxPosterType2"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_24"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/checkboxPosterType1"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_4" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textPosterType3"
+            style="@style/TextContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkboxPosterType2"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_4"
+            android:text="@string/poster_type_3" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkboxPosterType3"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_24"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/checkboxPosterType2"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_4" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textWallType"
+            style="@style/SearchFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkboxPosterType3"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/wall_type"
+            android:textColor="@color/color_black" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textWallType1"
+            style="@style/TextContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textWallType"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_4"
+            android:text="@string/wall_type_1" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkboxPWallType1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_24"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/textWallType"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_4" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textWallType2"
+            style="@style/TextContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkboxPWallType1"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_4"
+            android:text="@string/wall_type_2" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkboxPWallType2"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_24"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/checkboxPWallType1"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_4" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textWallType3"
+            style="@style/TextContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkboxPWallType2"
+            android:layout_marginStart="@dimen/dp_24"
+            android:text="@string/wall_type_3" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkboxPWallType3"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_24"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/checkboxPWallType2"
+            android:layout_marginEnd="@dimen/dp_16" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textPlaceSize"
+            style="@style/SearchFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkboxPWallType3"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/place_size"
+            android:textColor="@color/color_black" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textWidth"
+            style="@style/TextContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textPlaceSize"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/place_width" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textWidthChoose"
+            style="@style/TextContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textPlaceSize"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_toEndOf="@+id/textWidth" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/seekBarWidth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textWidth"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_8"
+            android:max="20" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textHeight"
+            style="@style/TextContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekBarWidth"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_8"
+            android:gravity="center_vertical"
+            android:text="@string/place_height" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textHeightChoose"
+            style="@style/TextContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekBarWidth"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_toEndOf="@+id/textHeight" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/seekBarHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textHeight"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_8"
+            android:max="20" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textPrice"
+            style="@style/SearchFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekBarHeight"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/price"
+            android:textColor="@color/color_black" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textPriceLimit"
+            style="@style/TextContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textPrice"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/price_limit" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textPriceChoose"
+            style="@style/TextContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textPrice"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_toEndOf="@+id/textPriceLimit" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/seekBarPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textPriceLimit"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_8"
+            android:max="10" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSearch"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/action_search"
+            android:textColor="@color/color_white"
+            app:iconGravity="textStart"
+            app:iconPadding="@dimen/dp_16" />
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

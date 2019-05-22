@@ -8,4 +8,5 @@
     <color name="color_second_primary_dark">#0871C4</color>
     <color name="color_blue">#32AAE2</color>
     <color name="color_black">#000000</color>
+    <color name="color_gray">#E6E1E1</color>
 </resources>

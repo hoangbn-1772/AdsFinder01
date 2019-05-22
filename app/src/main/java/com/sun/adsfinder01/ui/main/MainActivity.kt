@@ -4,25 +4,31 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.view.View.OnClickListener
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.sun.adsfinder01.R
 import com.sun.adsfinder01.data.model.User
 import com.sun.adsfinder01.ui.home.HomeFragment
+import com.sun.adsfinder01.ui.search.SearchFragment
 import kotlinx.android.synthetic.main.app_bar_home.bottomNavigation
+import kotlinx.android.synthetic.main.app_bar_home.root_search
 import kotlinx.android.synthetic.main.app_bar_home.toolbar
 import kotlinx.android.synthetic.main.app_bar_home.viewPagerHome
 import kotlinx.android.synthetic.main.nav_header_home.view.imageViewUserImage
 import kotlinx.android.synthetic.main.nav_header_home.view.textUserName
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-    BottomNavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
+    BottomNavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener, OnClickListener {
 
     private val user by lazy { intent.getParcelableExtra<User>(EXTRA_USER) }
 
@@ -88,10 +94,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onPageSelected(position: Int) {
     }
 
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.root_search -> goToSearch()
+        }
+    }
+
     private fun initComponents() {
         initNavigationDrawer()
         initBottomNavigation()
         setupViewPager()
+        root_search.setOnClickListener(this)
     }
 
     private fun initNavigationDrawer() {
@@ -128,6 +141,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         view.textUserName?.text = "${user.firstName} ${user.lastName}"
+    }
+
+    private fun goToSearch() {
+        supportFragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.drawer_layout, SearchFragment())
+            ?.addToBackStack("")
+            ?.commit()
     }
 
     companion object {
