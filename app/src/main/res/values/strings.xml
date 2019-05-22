@@ -74,5 +74,6 @@
     <string name="price_limit">Từ 0–10tr: </string>
     <string name="action_search">Tìm kiếm</string>
     <string name="price_unit">tr</string>
+    <string name="search_result">Kết quả tìm kiếm</string>
 
 </resources>

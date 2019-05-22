@@ -13,7 +13,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.sun.adsfinder01.R
@@ -105,6 +104,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         initBottomNavigation()
         setupViewPager()
         root_search.setOnClickListener(this)
+        initPlaceApiClient()
     }
 
     private fun initNavigationDrawer() {
@@ -121,6 +121,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun initBottomNavigation() {
         bottomNavigation?.setOnNavigationItemSelectedListener(this)
+    }
+
+    private fun initPlaceApiClient() {
+        Places.initialize(applicationContext, "AIzaSyCr4FE23qDJq1UA3Bw1UbYjvm0DAKmi0y0")
     }
 
     private fun setupViewPager() {
@@ -146,7 +150,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun goToSearch() {
         supportFragmentManager
             ?.beginTransaction()
-            ?.replace(R.id.drawer_layout, SearchFragment())
+            ?.replace(R.id.drawer_layout, SearchFragment.newInstance(user))
             ?.addToBackStack("")
             ?.commit()
     }
