@@ -1,7 +1,6 @@
 package com.sun.adsfinder01.ui.search
 
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -14,6 +13,7 @@ import com.sun.adsfinder01.data.model.ApiResponse
 import com.sun.adsfinder01.data.model.NetworkStatus.ERROR
 import com.sun.adsfinder01.data.model.NetworkStatus.SUCCESS
 import com.sun.adsfinder01.data.model.Place
+import com.sun.adsfinder01.data.model.Seeker
 import com.sun.adsfinder01.data.model.User
 import com.sun.adsfinder01.ui.home.HomeAdapter
 import com.sun.adsfinder01.ui.placedetail.PlaceDetailFragment
@@ -24,15 +24,25 @@ import kotlinx.android.synthetic.main.fragment_search_result.imagePrevious
 import kotlinx.android.synthetic.main.fragment_search_result.progressLoading
 import kotlinx.android.synthetic.main.fragment_search_result.recyclerViewSearch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.ArrayList
 
 class SearchResultFragment : Fragment(), OnClickListener {
 
-    private val user by lazy { arguments?.getParcelable<User>(Constants.ARGUMENT_USER) }
+    private var user: User? = null
 
-    private val places by lazy { arguments?.getParcelableArrayList<Place>(ARGUMENT_PLACES) }
+    private var seeker: Seeker? = null
 
     private val viewModel: SearchResultViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.apply {
+            user = getParcelable(Constants.ARGUMENT_USER)
+            seeker = getParcelable(ARGUMENT_SEEKER)
+        } ?: run {
+            user = User()
+            seeker = Seeker("", "")
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_search_result, container, false)
@@ -43,7 +53,11 @@ class SearchResultFragment : Fragment(), OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initComponents()
-        showPlaces()
+        user?.id?.let {
+            viewModel.findPlace(it, seeker!!)
+            showLoading()
+            hidePlacesEmpty()
+        }
         doObserve()
     }
 
@@ -57,26 +71,12 @@ class SearchResultFragment : Fragment(), OnClickListener {
         imagePrevious.setOnClickListener(this)
     }
 
-    private fun showPlaces() {
-        when {
-            places.isNullOrEmpty() -> showPlacesEmpty()
-            else -> {
-                hidePlacesEmpty()
-
-                val searchAdapter = HomeAdapter(
-                    places!!,
-                    { place -> onClickPlaceItem(place) },
-                    { place, status -> handleLikePost(place, status) })
-
-                recyclerViewSearch?.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = searchAdapter
-                }
-            }
-        }
-    }
-
     private fun doObserve() {
+        viewModel.places.observe(this, Observer { response ->
+            handleResponse(response)
+            hideLoading()
+        })
+
         viewModel.savePlaceLiveData.observe(this, Observer {
             savePlace(it)
         })
@@ -86,35 +86,11 @@ class SearchResultFragment : Fragment(), OnClickListener {
         })
     }
 
-    private fun onClickPlaceItem(place: Place) {
-        activity?.supportFragmentManager
-            ?.beginTransaction()
-            ?.replace(R.id.drawer_layout, PlaceDetailFragment.newInstance(user, place))
-            ?.addToBackStack("")
-            ?.commit()
-    }
-
-    private fun handleLikePost(place: Place, status: Boolean) {
-        when {
-            status -> {
-                viewModel.savePlace(user?.id, place.id)
-            }
-            else -> {
-                viewModel.removePlace(user?.id, place.id)
-            }
+    private fun handleResponse(response: ApiResponse<List<Place>>) {
+        when (response.status) {
+            SUCCESS -> showPlaces(response.data)
+            ERROR -> context?.showMessage(response.message)
         }
-    }
-
-    private fun showPlacesEmpty() {
-        progressLoading?.visibility = View.GONE
-        recyclerViewSearch?.visibility = View.GONE
-        imageEmpty?.visibility = View.VISIBLE
-    }
-
-    private fun hidePlacesEmpty() {
-        progressLoading?.visibility = View.GONE
-        recyclerViewSearch?.visibility = View.VISIBLE
-        imageEmpty?.visibility = View.GONE
     }
 
     private fun savePlace(response: ApiResponse<Boolean>) {
@@ -131,13 +107,68 @@ class SearchResultFragment : Fragment(), OnClickListener {
         }
     }
 
-    companion object {
-        const val ARGUMENT_PLACES = "ARGUMENT_PLACES"
+    private fun showPlaces(places: List<Place>?) {
+        if (places.isNullOrEmpty()) {
+            showPlacesEmpty()
+            return
+        }
 
-        fun newInstance(user: User?, places: List<Place>?) = SearchResultFragment().apply {
+        hidePlacesEmpty()
+        val searchAdapter = HomeAdapter(
+            places,
+            { place -> onClickPlaceItem(place) },
+            { place, status -> likePost(place, status) })
+
+        recyclerViewSearch?.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = searchAdapter
+        }
+    }
+
+    private fun onClickPlaceItem(place: Place) {
+        activity?.supportFragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.drawer_layout, PlaceDetailFragment.newInstance(user, place))
+            ?.addToBackStack("")
+            ?.commit()
+    }
+
+    private fun likePost(place: Place, status: Boolean) {
+        when {
+            status -> {
+                viewModel.savePlace(user?.id, place.id)
+            }
+            else -> {
+                viewModel.removePlace(user?.id, place.id)
+            }
+        }
+    }
+
+    private fun showPlacesEmpty() {
+        recyclerViewSearch?.visibility = View.GONE
+        imageEmpty?.visibility = View.VISIBLE
+    }
+
+    private fun hidePlacesEmpty() {
+        recyclerViewSearch?.visibility = View.VISIBLE
+        imageEmpty?.visibility = View.GONE
+    }
+
+    private fun showLoading() {
+        progressLoading?.visibility = View.VISIBLE
+    }
+
+    private fun hideLoading() {
+        progressLoading?.visibility = View.GONE
+    }
+
+    companion object {
+        const val ARGUMENT_SEEKER = "ARGUMENT_SEEKER"
+
+        fun newInstance(user: User?, seeker: Seeker) = SearchResultFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(Constants.ARGUMENT_USER, user)
-                putParcelableArrayList(ARGUMENT_PLACES, places as ArrayList<out Parcelable>)
+                putParcelable(ARGUMENT_SEEKER, seeker)
             }
         }
     }

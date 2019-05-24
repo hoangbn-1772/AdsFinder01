@@ -7,15 +7,15 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class User(
-    @SerializedName(ID) val id: Int?,
-    @SerializedName(FIRST_NAME) val firstName: String?,
-    @SerializedName(LAST_NAME) val lastName: String?,
-    @SerializedName(PHONE) val phone: String?,
-    @SerializedName(EMAIL) val email: String?,
-    @SerializedName(IMAGE_URL) val imageUrl: String?,
-    @SerializedName(BIRTH_DATE) val birthDate: String?,
-    @SerializedName(GENDER) var gender: String?,
-    @SerializedName(ROLE) var role: String?
+    @SerializedName(ID) val id: Int? = null,
+    @SerializedName(FIRST_NAME) val firstName: String? = null,
+    @SerializedName(LAST_NAME) val lastName: String? = null,
+    @SerializedName(PHONE) val phone: String? = null,
+    @SerializedName(EMAIL) val email: String? = null,
+    @SerializedName(IMAGE_URL) val imageUrl: String? = null,
+    @SerializedName(BIRTH_DATE) val birthDate: String? = null,
+    @SerializedName(GENDER) var gender: String? = null,
+    @SerializedName(ROLE) var role: String? = null
 ) : Parcelable {
 
     companion object {

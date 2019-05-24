@@ -13,20 +13,13 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.mapbox.geojson.Point
-import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions
 import com.sun.adsfinder01.R
-import com.sun.adsfinder01.data.model.ApiResponse
-import com.sun.adsfinder01.data.model.NetworkStatus.ERROR
-import com.sun.adsfinder01.data.model.NetworkStatus.SUCCESS
-import com.sun.adsfinder01.data.model.Place
 import com.sun.adsfinder01.data.model.Seeker
 import com.sun.adsfinder01.data.model.User
 import com.sun.adsfinder01.util.Constants
-import com.sun.adsfinder01.util.ContextExtension.showMessage
 import kotlinx.android.synthetic.main.fragment_search.buttonSearch
 import kotlinx.android.synthetic.main.fragment_search.checkboxPWallType1
 import kotlinx.android.synthetic.main.fragment_search.checkboxPWallType2
@@ -50,15 +43,6 @@ class SearchFragment : Fragment(), OnClickListener, OnSeekBarChangeListener, OnC
     private val user by lazy { arguments?.getParcelable(Constants.ARGUMENT_USER) as User }
 
     private val viewModel: SearchViewModel by viewModel()
-
-    private var pointSearch = LatLng(0.0, 0.0)
-
-    private var placeNameSearch = ""
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        doObserve()
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
@@ -101,10 +85,10 @@ class SearchFragment : Fragment(), OnClickListener, OnSeekBarChangeListener, OnC
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_AUTOCOMPLETE && data != null) {
             val feature = PlaceAutocomplete.getPlace(data)
             val point = feature.geometry() as Point
-            pointSearch.latitude = point.latitude()
-            pointSearch.longitude = point.longitude()
-            placeNameSearch = feature.placeName() ?: resources.getString(R.string.search)
-            textPlaceSearch.text = placeNameSearch
+            viewModel.pointSearch.latitude = point.latitude()
+            viewModel.pointSearch.longitude = point.longitude()
+            viewModel.placeNameSearch = feature.placeName() ?: resources.getString(R.string.search)
+            textPlaceSearch.text = viewModel.placeNameSearch
         }
     }
 
@@ -115,16 +99,8 @@ class SearchFragment : Fragment(), OnClickListener, OnSeekBarChangeListener, OnC
         seekBarWidth.setOnSeekBarChangeListener(this)
         seekBarHeight.setOnSeekBarChangeListener(this)
         seekBarPrice.setOnSeekBarChangeListener(this)
-        if (placeNameSearch.isEmpty()) {
-            placeNameSearch = resources.getString(R.string.search)
-        }
-        textPlaceSearch.text = placeNameSearch
-    }
 
-    private fun doObserve() {
-        viewModel.places.observe(this, Observer { response ->
-            handleResponse(response)
-        })
+        textPlaceSearch.text = viewModel.placeNameSearch?.let { it } ?: resources.getString(R.string.search)
     }
 
     private fun showPriceSearchLimit(price: Int) {
@@ -181,27 +157,16 @@ class SearchFragment : Fragment(), OnClickListener, OnSeekBarChangeListener, OnC
         val seeker = Seeker(
             posterTypes,
             wallTypes,
-            pointSearch.latitude,
-            pointSearch.longitude,
+            viewModel.pointSearch.latitude,
+            viewModel.pointSearch.longitude,
             placeWidth = widthLimit,
             placeHeight = heightLimit,
             priceLimit = priceLimit
         )
 
-        viewModel.findPlace(user.id, seeker)
-    }
-
-    private fun handleResponse(response: ApiResponse<List<Place>>) {
-        when (response.status) {
-            SUCCESS -> showResult(response.data)
-            ERROR -> context?.showMessage(response.message)
-        }
-    }
-
-    private fun showResult(places: List<Place>?) {
         activity?.supportFragmentManager
             ?.beginTransaction()
-            ?.replace(R.id.drawer_layout, SearchResultFragment.newInstance(user, places))
+            ?.replace(R.id.drawer_layout, SearchResultFragment.newInstance(user, seeker))
             ?.addToBackStack("")
             ?.commit()
     }
