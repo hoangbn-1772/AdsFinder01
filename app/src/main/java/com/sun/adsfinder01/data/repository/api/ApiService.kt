@@ -3,6 +3,7 @@ package com.sun.adsfinder01.data.repository.api
 import com.sun.adsfinder01.data.model.Account
 import com.sun.adsfinder01.data.model.PlaceWrapper
 import com.sun.adsfinder01.data.model.UserWrapper
+import io.reactivex.Completable
 import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -43,10 +44,10 @@ interface ApiService {
     fun getPlaces(@Header(AUTHOR) author: Int?, @Query(CATEGORY) placeStatus: String?): Single<PlaceWrapper>
 
     @PUT(FAVORITE_PLACE)
-    fun savePlace(@Header(AUTHOR) author: Int?, @Query(PLACE_ID) placeId: Int?): Single<PlaceWrapper>
+    fun savePlace(@Header(AUTHOR) author: Int?, @Query(PLACE_ID) placeId: Int?): Completable
 
     @DELETE(FAVORITE_PLACE)
-    fun removePlace(@Header(AUTHOR) author: Int?, @Query(PLACE_ID) placeId: Int?): Single<PlaceWrapper>
+    fun removePlace(@Header(AUTHOR) author: Int?, @Query(PLACE_ID) placeId: Int?): Completable
 
     @GET(SEARCH_PLACE)
     fun findPlaces(

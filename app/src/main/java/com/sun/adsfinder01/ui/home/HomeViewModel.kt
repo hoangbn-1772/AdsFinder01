@@ -10,7 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class HomeViewModel(private val repository: PlaceRepository) : ViewModel() {
+open class HomeViewModel(private val repository: PlaceRepository) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -57,11 +57,11 @@ class HomeViewModel(private val repository: PlaceRepository) : ViewModel() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    { success ->
-                        _savePlaceLiveData.value = ApiResponse.onSuccess(success)
+                    {
+                        _savePlaceLiveData.value = ApiResponse.onSuccess(true)
                     },
-                    { error ->
-                        _savePlaceLiveData.value = ApiResponse.onError(error.toString())
+                    {
+                        _savePlaceLiveData.value = ApiResponse.onError(it.toString())
                     }
                 )
         )
@@ -73,8 +73,8 @@ class HomeViewModel(private val repository: PlaceRepository) : ViewModel() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    { success ->
-                        _removePlaceLiveData.value = ApiResponse.onSuccess(success)
+                    {
+                        _removePlaceLiveData.value = ApiResponse.onSuccess(true)
                     },
                     { error ->
                         _removePlaceLiveData.value = ApiResponse.onError(error.toString())

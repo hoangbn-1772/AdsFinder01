@@ -75,5 +75,8 @@
     <string name="action_search">Tìm kiếm</string>
     <string name="price_unit">tr</string>
     <string name="search_result">Kết quả tìm kiếm</string>
-
+    <string name="access_token">pk.eyJ1IjoiYm5oIiwiYSI6ImNqdnp6amZ0cTA1ZGY0YW52d2JyMmVxbWQifQ.OG2DHeoMhNhjYOfQ1LZGlA</string>
+    <string name="user_location_permission_explanation">Ứng dụng cần quyền truy cập vị trí để hiển thị chức năng</string>
+    <string name="user_location_permission_not_granted">Bạn đã không cấp quyền vị trí</string>
+    <string name="menu_direction">Chỉ đường</string>
 </resources>

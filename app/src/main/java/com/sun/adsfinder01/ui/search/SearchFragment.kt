@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.fragment_search.checkboxPosterType1
 import kotlinx.android.synthetic.main.fragment_search.checkboxPosterType2
 import kotlinx.android.synthetic.main.fragment_search.checkboxPosterType3
 import kotlinx.android.synthetic.main.fragment_search.imagePrevious
-import kotlinx.android.synthetic.main.fragment_search.root_search
+import kotlinx.android.synthetic.main.fragment_search.relativeSearch
 import kotlinx.android.synthetic.main.fragment_search.seekBarHeight
 import kotlinx.android.synthetic.main.fragment_search.seekBarPrice
 import kotlinx.android.synthetic.main.fragment_search.seekBarWidth
@@ -84,7 +84,7 @@ class SearchFragment : Fragment(), OnClickListener, OnSeekBarChangeListener, OnC
     }
 
     private fun initComponents() {
-        root_search.setOnClickListener(this)
+        relativeSearch.setOnClickListener(this)
         imagePrevious.setOnClickListener(this)
         buttonSearch.setOnClickListener(this)
         seekBarWidth.setOnSeekBarChangeListener(this)
@@ -169,7 +169,7 @@ class SearchFragment : Fragment(), OnClickListener, OnSeekBarChangeListener, OnC
     private fun showResult(places: List<Place>?) {
         activity?.supportFragmentManager
             ?.beginTransaction()
-            ?.replace(R.id.drawer_layout, SearchResultFragment.newInstance(places))
+            ?.replace(R.id.drawer_layout, SearchResultFragment.newInstance(user, places))
             ?.addToBackStack("")
             ?.commit()
     }
@@ -177,6 +177,7 @@ class SearchFragment : Fragment(), OnClickListener, OnSeekBarChangeListener, OnC
     companion object {
 
         private const val AUTOCOMPLETE_REQUEST_CODE = 1
+        private const val COUNTRY_CODE = "VN"
 
         private const val POSTER_TYPE_1 = 10000
         private const val POSTER_TYPE_2 = 10001

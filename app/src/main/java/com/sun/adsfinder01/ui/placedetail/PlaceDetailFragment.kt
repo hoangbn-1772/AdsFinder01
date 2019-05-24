@@ -12,8 +12,9 @@ import com.sun.adsfinder01.data.model.Place
 import com.sun.adsfinder01.data.model.User
 import com.sun.adsfinder01.ui.contract.ContractFragment
 import com.sun.adsfinder01.util.Constants
-import kotlinx.android.synthetic.main.fragment_place_detail.floating_contact
+import kotlinx.android.synthetic.main.fragment_place_detail.floating_call
 import kotlinx.android.synthetic.main.fragment_place_detail.floating_contract
+import kotlinx.android.synthetic.main.fragment_place_detail.floating_direction
 import kotlinx.android.synthetic.main.fragment_place_detail.imagePlace
 import kotlinx.android.synthetic.main.fragment_place_detail.imagePrevious
 import kotlinx.android.synthetic.main.fragment_place_detail.textAddress
@@ -45,15 +46,17 @@ class PlaceDetailFragment : Fragment(), OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.imagePrevious -> activity?.supportFragmentManager?.popBackStack()
-            R.id.floating_contact -> handleContact()
+            R.id.floating_call -> handleCall()
             R.id.floating_contract -> handleContract()
+            R.id.floating_direction -> navigate()
         }
     }
 
     private fun initComponents() {
         imagePrevious.setOnClickListener(this)
-        floating_contact.setOnClickListener(this)
+        floating_call.setOnClickListener(this)
         floating_contract.setOnClickListener(this)
+        floating_direction.setOnClickListener(this)
     }
 
     private fun showPlaceInfo() {
@@ -148,8 +151,15 @@ class PlaceDetailFragment : Fragment(), OnClickListener {
         }
     }
 
-    private fun handleContact() {
-        // Call for provider
+    private fun navigate() {
+        val desLat = place.lat ?: 0.0
+        val desLng = place.lng ?: 0.0
+
+        startActivity(context?.let { DirectionPlaceActivity.getIntent(it, desLat, desLng) })
+    }
+
+    private fun handleCall() {
+        // Contact with provider
     }
 
     private fun handleContract() {

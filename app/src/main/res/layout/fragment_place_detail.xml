@@ -180,12 +180,11 @@
         fab:menu_labels_showAnimation="@anim/jump_from_down">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/floating_contact"
+            android:id="@+id/floating_call"
             style="@style/MenuLabelsStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_call"
-            app:fab_colorDisabled="@color/color_blue"
             app:fab_colorNormal="@color/color_blue"
             app:fab_label="@string/menu_call"
             app:fab_size="mini" />
@@ -198,6 +197,16 @@
             android:src="@drawable/ic_contract"
             app:fab_colorNormal="@color/color_blue"
             app:fab_label="@string/menu_contract"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floating_direction"
+            style="@style/MenuLabelsStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_direction"
+            app:fab_colorNormal="@color/color_blue"
+            app:fab_label="@string/menu_direction"
             app:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>
